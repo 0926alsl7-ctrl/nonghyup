@@ -1,36 +1,372 @@
-@font-face {
-    font-family: Apple SD Gothic Neo;
-    src: url(fonts/AppleSDGothicNeo-main/AppleSDGothicNeo.css);
-}
 *{margin: 0; padding: 0;
-    border: 0;
-    background: transparent;
+    text-decoration: none;
+    word-break: keep-all;
 box-sizing: border-box;
-font-size: 100%;
-font-family: Apple SD Gothic Neo, sans-serif;
-letter-spacing: -1px;
 }
 html{
-    width: 100%;
-    height: 100%;
-    color: #666;
-    font-weight: 300;
+font-size: 62.5%;
 }
 body{
-    word-break: keep-all;
-    width: 100%;
-    line-height: 1;
-    font-size: 15px;
+    overflow: visible;
+    font-size: 13pt;
+    color: #484848;
+    line-height: 1.45;
+    font-family: 'Apple SD Gothic Neo', sans-serif;
+    -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;    
 }
-.fp-enabled {overflow: hidden;
-height: 100%;}
-:root{
-    --swiper-theme-color:#007aff;
-        --swiper-navigation-size:44px;
-}
-#wrap{
+html,body{
     width: 100%;
+    height: auto;
+    background: #fff;
+}
+ul,li{
+    list-style: none;
+}
+select,input,textarea,button{
+    outline: none;
+    border: none;
+    appearance: none;
+        margin: 0;
+    padding: 0;
+      font-family: 'Apple SD Gothic Neo', sans-serif;
+}
+img{
+    border: 0 none;
+    vertical-align: middle;
+    max-width: 100%;
+}
+a{
+    color: #484848;
+    cursor: pointer;
+    text-decoration: none;
+}
+h1,h2,h3,h4,h5,h6{
+    font-size: 100%;
+}
+section{
+    width: 1280px;
+    margin: 0 auto;
+}
+/* (1) header ============================= */
+#header{
+    position: relative;
+    width: 100%;
+    min-width: 100%;
+    height: 120px;
+    background-color: #fff;
+}
+#header .header-inner{
+    position: relative;
+    max-width: 1280px;
+    height: 100%;
+    margin: 0 auto;
+}
+#header .header-inner .logo{
+    float: left;
+    padding-top: 14px;
+    height: 46px;
+}
+#header .header-inner .logo .logo-img{
+    width: 180px;
+    overflow: hidden;
+    background: url(images/logo.png) no-repeat 0 50%;
+    text-indent: 100%;
+    white-space: nowrap;
+    font-size: 35px;
+    display: inline-block;
+}
+.gnb{
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 2px;
+}
+
+.gnb > li{
+    width: fit-content;
+    height: 18px;
+    float: left;
+    position:relative;
+}
+.gnb label{
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    height: auto;
+    padding: 0 25px 0 5px;
+    position: relative;
+    z-index: 2;
+}
+.gnb > li:last-child label{
+    padding: 0 0 0 25px;
+}
+.gnb span{
+    pointer-events: none;
+    margin-left: 8px;
+    transition: transform 0.3s;
+}
+.gnb select{
+    font-size: 16px !important;
+    width: 100%;
+    color: #484848
+}
+
+.gnb select:hover{
+     color: #0055a5 !important;
+}
+.gnb select option {
+    display: block;
+    padding: 17px 0 0 20px;
+}
+
+#selectLang.selected{
+    color: #000 !important;
+}
+#selectBanking.selected{
+    color: #0055a5 !important;
+}
+#navMenu{
+    width: 89.2%;
+    height: 20px;
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#navMenu > li{
+    position: relative;
+}
+#navMenu > li > a{
+    font-size: 17px;
+    padding: 10px 0 13px;
+    color: #171717;
+    transition: color 0.3s;
+}
+#navMenu > li > a::after {
+    content: '';
+    position: absolute;
+    bottom: -14px; left: 0;
+    width: 0; height: 4px;
+    border-radius: 1px;
+    background: #0055a5; 
+    transition: width 0.3s;
+}
+#navMenu > li:hover > a {
+    color: #0055a5;
+    font-weight: 600;
+}
+#navMenu > li:hover > a::after {
+    width: 100%;
+}
+
+#navMenu .depth2{
+    opacity: 0;
+    visibility: hidden;
+    width: 257px;
+    height: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 14px;
+    z-index: 101;
+        padding: 32px 22px;
+    position: absolute;
+    top: 55px;
+    left: -14px;
+    transform:  translateY(10px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+#navMenu .depth2::before {
+    content: '';
+    position: absolute;
+    top: -8px; left: 12px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 10px solid #fff;
+}
+#navMenu > li:hover .depth2 {
+    opacity: 1;
+    visibility: visible;
+}
+
+.depth2 > li{
+    width: 100%;
+    height: 20px;
+    margin-bottom: 16px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+.depth2 > li:last-child{
+    margin-bottom: 0;
+}
+.depth2 > li > a {
+    font-size: 14px;
+    color: #5f5f5f;
+    display: block;
+    padding: 5px;
+    transition: all 0.3s;
+}
+
+.depth2 > li:hover > a {
+    color: #0055a5;
+    font-weight: 600;
+    padding-left: 8px; 
+}
+.menuAll{
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+}
+.menuAll-icon{
+    display: block;
+    width: 26px;
+    height: 18px;
+    background: url(images/icon_menuAll.png) no-repeat 0 0;
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+/* */
+.nav-wrap{
+    width: 100%;
+    height: calc(100vh - 99px);
+    position: absolute;
+    top: 99px;
+    z-index: 100;
+    touch-action: none;
+    z-index: 100;
+}
+/* (2) Contents ==============================  */
+#contents{
+    margin: 0 auto;
+}
+#section-wrap{
     position: relative;
     overflow: hidden;
-    min-width: 1200px;
+    width: 100%;
+}
+.title_bg_img{
+    width: 100%;
+    max-height: 400px;
+}
+.title_bg_m_img,.title_bg_t_img{
+    display: none;
+}
+/* (2) Contents - news-wrap */
+#news-wrap{
+    width: 100%;
+    max-width: 1280px;
+    margin: 64px auto;
+    position: relative;
+}
+#news-wrap .container{
+    border-radius: 16px;
+}
+#news-wrap .news-header{
+    margin-bottom: 28px;
+    font-weight: 700;
+    font-size: 2.8rem;
+    color: #000;
+}
+.left-slide .logo-bx {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+}
+.left-slide .logo-bx .icon-bx img{
+   filter: drop-shadow(10px);
+}
+.news-swiper .swiper-slide {
+    display: flex; /* 왼쪽 오른쪽 나란히 */
+    height: 500px; /* 높이 고정 */
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #f4f7fa; /* 카뱅 느낌 연회색 */
+}
+.news-swiper .left-slide {
+    width: 58%; /* 하민이가 정한 비율 */
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #f4f7fa; /* 텍스트 박스 배경 */
+}
+.news-swiper .right-slide {
+    width: 42%;
+    overflow: hidden;
+}
+.news-swiper .right-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 사진 꽉 채우기 */
+}
+/* 텍스트 스타일링 */
+.news-swiper .left-slide .logo-bx h5 {
+    color: #0055a5; /* 농협 블루 포인트 */
+    font-size: 1.6rem;
+}
+.story-title {
+    font-size: 2.8rem;
+    font-weight: 400;
+    color: #2c2c2c;
+    margin-top: 20px;
+    line-height: 1.3;
+}
+.story-detail {
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 1.75;
+    color: #484848;
+    margin-top: 14px;
+}
+.story-date{
+    font-weight: 600;
+    color: #666;
+    font-size: 1.4rem;
+    margin-top: 14px;
+}
+
+/* 컨트롤러 (화살표 & 동그라미) */
+.swiper-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+.swiper-button-prev, .swiper-button-next {
+    position: static !important; /* 기본 위치 무시 */
+    color: #0055a5 !important;
+}
+.swiper-pagination {
+    position: static !important;
+    width: auto !important;
+}
+
+/* (2) Contents - company */
+#company{
+    min-width: 310px;
+    height: 170px;
+    margin-top: 45px;
+    margin-bottom: 45px;
+}
+/* (2) Contents - customer */
+#customer{
+    height: 125px;
+    position: relative;
+    background: #fff;
+    border-radius: 30px;
+    border: 3px solid #bbcbd9;
+    box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    margin-bottom: 50px;
+}
+@media screen and (max-width: 1280px){
+    #header{
+        height: 100px;
+    }
+    #header .header-inner{
+        width: calc(100% - 40px);
+    }
 }

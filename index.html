@@ -3,15 +3,291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, minimum-scale=0.25, maximum-scale=10, user-scalable=yes">
-    <title>농협</title>
-    <link rel="shortcut icon" href="images/favicon.ico">
+    <title>NH 농협은행</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="fonts/AppleSDGothicNeo-main/AppleSDGothicNeo.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="index.css">
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="index.js" defer></script>
+
 </head>
 <body>
-    <div id="skip-navigation"></div>
-    <div id="wrap" class="main theme-dark"></div>
-    <div id="dimmed"></div>
-    <div id="fp-nav" class="left fp-left"></div>
+  <div class="skipNav"></div>
+  <div id="wrapper">
+    <div id="header">
+        <div class="header-inner">
+            <h1 class="logo">
+                <a href="">
+                    <span class="logo-img">NH 농협은행</span>
+                </a>
+            </h1>
+            <ul class="gnb">
+                <li class="lang">
+                    <label for="lang">
+                    <select name="lang" id="selectLang">
+                        <option selected>Language</option>
+                        <option >한국어</option>
+                        <option >English</option>
+                        <option >日本語</option>
+                        <option >中國語</option>
+                    </select>
+                    <span>
+                        <img src="images/down_arr_small.png" alt>
+                    </span>
+                    </label>
+                </li>
+                <li class="banking">
+                    <label for="banking">
+                     <select name="banking" id="selectBanking">
+                        <option selected>Banking</option>
+                        <option >개인</option>
+                        <option >기업</option>
+                    </select>
+                    <span>
+                        <img src="images/down_arr_small.png" alt>
+                    </span>
+                    </label>
+                </li>
+            </ul>
+            <div class="mainMenu">
+                <div class="menuHead"></div>
+                <ul id="navMenu">
+                    <li class="nav nav1">
+                        <a href="">은행안내</a>
+                        <ul class="depth2">
+                            <li><a href="">CEO 인사말</a></li>
+                            <li><a href="">기업이념</a></li>
+                            <li><a href="">연혁</a></li>
+                            <li><a href="">조직도</a></li>
+                            <li><a href="">찾아오시는 길</a></li>
+                            <li><a href="">영업점 안내</a></li>
+                            <li><a href="">공고</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav nav2">
+                        <a href="">윤리경영</a>
+                        <ul class="depth2">
+                            <li><a href="">윤리경영 소개</a></li>
+                            <li><a href="">윤리경영 추진전략</a></li>
+                            <li><a href="">윤리경영 추진경과</a></li>
+                            <li><a href="">윤리경영 시스템</a></li>
+                            <li><a href="">자주 묻는 질문</a></li>
+                            <li><a href="">신고제도</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav nav3">
+                        <a href="">금융소비자보호</a>
+                        <ul class="depth2">
+                            <li><a href="">금융소비자보호 소개</a></li>
+                            <li><a href="">금융소비자보호 체계</a></li>
+                            <li><a href="">고객의 소리</a></li>
+                            <li><a href="">금융소비자보호 공시</a></li>
+                            <li><a href="">금융소비자보호 우수사례</a></li>
+                            <li><a href="">금융소비자보호 금융정보</a></li>
+                            <li><a href="">보이스피싱 피해예방</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav nav4">
+                        <a href="">기업지배구조</a>
+                        <ul class="depth2">
+                            <li><a href="">이사회</a></li>
+                            <li><a href="">이사회 공시</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="nav nav5">
+                        <a href="">경영정보</a>
+                        <ul class="depth2">
+                            <li><a href="">공시</a></li>
+                            <li><a href="">재무현황</a></li>
+                            <li><a href="">국제신용등급</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav nav6">
+                        <a href="">ESG경영</a>
+                        <ul class="depth2">
+                            <li><a href="">ESG경영</a></li>
+                            <li><a href="">사회공헌</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav nav7">
+                        <a href="">채용정보</a>
+                        <ul class="depth2">
+                            <li><a href="">인재상</a></li>
+                            <li><a href="">인사제도</a></li>
+                            <li><a href="">채용절차</a></li>
+                            <li><a href="">FAQ</a></li>                     
+                        </ul>
+                    </li>
+                    <li class="nav nav8">
+                        <a href="">홍보센터</a>
+                        <ul class="depth2">
+                            <li><a href="">NH 뉴스</a></li>
+                            <li><a href="">영상 광고</a></li>
+                            <li><a href="">인쇄 광고</a></li>
+                            <li><a href="">CI</a></li>
+                            <li><a href="">올인원프렌즈 캐릭터</a></li>
+                            <li><a href="">연차보고서</a></li>
+                            <li><a href="">스포츠단</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="menuAll">
+                <a href="" class="menuAll-icon" title="전체메뉴 이동">전체메뉴</a>
+            </div>
+        </div>
+        <div class="nav-wrap"></div>
+    </div>
+    <div class="pContents">
+        <div id="contents">
+            <div id="section-wrap">
+                <img src="images/back1.jpg" alt="사랑받는 일등 민족은행 농업인과 고객 모두가 행복한 금융을 만들어 갑니다" class="title_bg_img">
+                <img src="images/mob_back1.jpg" alt="사랑받는 일등 민족은행 농업인과 고객 모두가 행복한 금융을 만들어 갑니다" class="title_bg_m_img">
+                <img src="images/tab_back1.jpg" alt="사랑받는 일등 민족은행 농업인과 고객 모두가 행복한 금융을 만들어 갑니다" class="title_bg_t_img">
+            <div>
+               <section id="news-wrap">
+    <div class="container">
+        <div class="news-header">
+            <h2 class="news-header-txt">NH 뉴스</h2>
+        </div>
+        <div class="swiper news-swiper">
+            <div class="swiper-wrapper">    
+                <div class="swiper-slide">
+                    <div class="left-slide">
+                        <div class="logo-bx">  
+                            <h5>대한민국의 행복파트너! NH농협은행</h5>
+                            <div class="swiper-controls">
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                        <div class="text-bx">
+                            <h3 class="story-title">NH농협은행, 전남 완도군서 <br>「우리 동네 빛나는 졸업식」 개최</h3>
+                            <p class="story-detail">농촌·저출생 지역 아동 대상 진로·문화 체험프로그램으로 꿈 응원</p>
+                            <p class="story-date">2026.01.12</p>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        </div>
+                    <div class="right-slide">
+                        <img src="images/imgpc_1.jpg" alt="뉴스이미지">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="left-slide">
+                        <div class="logo-bx">  
+                            <h5>대한민국의 행복파트너! NH농협은행</h5>
+                            <div class="swiper-controls">
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                        <div class="text-bx">
+                            <h3 class="story-title">NH농협은행, WM과 RM융합과정<br>「RWM전문가 교육」실시</h3>
+                            <p class="story-detail">NH농협은행, WM과 RM융합과정 「RWM전문가 교육」실시</p>
+                            <p class="story-date">2026.01.12</p>
+                        </div>
+                        <div class="swiper-pagination"></div> 
+                    </div>
+                    <div class="right-slide">
+                        <img src="images/imgpc_2.png" alt="뉴스이미지">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="left-slide">
+                         <div class="logo-bx">  
+                            <h5>대한민국의 행복파트너! NH농협은행</h5>
+                            <div class="swiper-controls">
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                        <div class="text-bx">
+                            <h3 class="story-title">NH농협카드, 변우석과 함께한 <br>‘NH pay’신규 광고 영상 공개</h3>
+                            <p class="story-detail">NH농협카드, 변우석과 함께한 ‘NH pay’신규 광고 영상 공개</p>
+                            <p class="story-date">2026.01.09</p>
+                        </div>
+                        <div class="swiper-pagination"></div> 
+                    </div>
+                    <div class="right-slide">
+                        <img src="images/imgpc_3.png" alt="뉴스이미지">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="left-slide">
+                        <div class="logo-bx">  
+                            <h5>대한민국의 행복파트너! NH농협은행</h5>
+                            <div class="swiper-controls">
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                        <div class="text-bx">
+                            <h3 class="story-title">NH농협은행, 신입행원 <br>입문교육 수료식 실시</h3>
+                            <p class="story-detail">NH농협은행, 신입행원 입문교육 수료식 실시</p>
+                             <p class="story-date">2026.01.09</p>
+                        </div>
+                            <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="right-slide">
+                        <img src="images/imgpc_4.jpg" alt="뉴스이미지">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="left-slide">
+                        <div class="logo-bx">  
+                            <h5>대한민국의 행복파트너! NH농협은행</h5>
+                            <div class="swiper-controls">
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                        <div class="text-bx">
+                            <h3 class="story-title">NH농협은행, 당근부동산 안심송금 서비스 출시</h3>
+                            <p class="story-detail">당근페이와 NH API 연계로 당근부동산 안심송금 서비스 오픈</p>
+                            <p class="story-date">2026.01.08</p>
+                        </div>
+                        
+                            <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="right-slide">
+                        <img src="images/imgpc_5.jpg" alt="뉴스이미지">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="left-slide">
+                         <div class="logo-bx">  
+                            <h5>대한민국의 행복파트너! NH농협은행</h5>
+                            <div class="swiper-controls">
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                        <div class="text-bx">
+                            <h3 class="story-title">NH농협은행, 생산적금융 대전환 위한<br>「NH미래성장기업대출」출시</h3>
+                            <p class="story-detail">NH농협은행, 생산적금융 대전환 위한 「NH미래성장기업대출」출시</p>
+                             <p class="story-date">2026.01.08</p>
+                        </div>
+                            <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="right-slide">
+                        <img src="images/imgpc_6.png" alt="뉴스이미지">
+                    </div>
+                </div>
+                </div>
+        </div>
+    </div>
+</section>
+
+                <section id="company"></section>
+                <section id="customer"></section>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
+  </div>
 </body>
 </html>
