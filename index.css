@@ -300,11 +300,10 @@ section{
 .news-swiper .right-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 사진 꽉 채우기 */
+    object-fit: cover;
 }
-/* 텍스트 스타일링 */
 .news-swiper .left-slide .logo-bx h5 {
-    color: #0055a5; /* 농협 블루 포인트 */
+    color: #0055a5; 
     font-size: 1.6rem;
 }
 .story-title {
@@ -328,7 +327,6 @@ section{
     margin-top: 14px;
 }
 
-/* 컨트롤러 (화살표 & 동그라미) */
 .swiper-controls {
     display: flex;
     align-items: center;
@@ -336,7 +334,7 @@ section{
     position: relative;
 }
 .swiper-button-prev, .swiper-button-next {
-    position: static !important; /* 기본 위치 무시 */
+    position: static !important; 
     color: #0055a5 !important;
 }
 .swiper-pagination {
