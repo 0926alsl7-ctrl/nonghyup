@@ -406,9 +406,12 @@ section{
 .vision-cards {
     display: flex !important;
     width: 100% !important;
-    gap: 30px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 20px 0;
+    overflow: visible !important;
+}
+.vision-cards .swiper-wrapper{
+    gap: 20px !important;
 }
 
 .vision-card {
@@ -447,9 +450,7 @@ section{
     color: #666;
     line-height: 1.6;
 }
-    .company-pagination {
-        display: none !important;
-    }
+
 /* (4) Contents - manage */
 #manage {
     width: 100%;
@@ -910,31 +911,32 @@ object-fit: cover;  }
     /* 1. Swiper 컨테이너 설정 */
     .vision-swiper.vision-cards {
         display: block !important; /* 중요: 기존 flex 해제해야 안 깨짐 */
-        padding: 60px 0 !important; /* 위아래 여백 (위로 올라올 공간 확보) */
+        padding: 50px 0 !important; /* 위아래 여백 (위로 올라올 공간 확보) */
         overflow: visible !important; 
         width: 100% !important;
     }
 
     .vision-card {
         flex: none !important;
-        width: 280px !important; /* 카드 너비 고정 (너비가 일정해야 예쁨) */
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        width: 250px !important; /* 카드 너비 고정 (너비가 일정해야 예쁨) */
+        height: auto;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
         opacity: 0.3 !important; 
-        transform: scale(0.85) !important;
+        transform: scale(0.8) !important;
     }
 
     /* 2. [핵심] 가운데 활성화된 카드(Active) 효과 */
     .vision-card.swiper-slide-active {
            opacity: 1 !important;
-        transform: scale(1.05) translateY(-25px) !important;
+        transform: scale(1.0) translateY(-25px) !important;
         z-index: 10;
     }
 
     /* 3. 카드 내부 디자인 (높이 고정) */
     .card-inner {
         flex-direction: column !important;
-        height: 350px !important; /* 텍스트 많으니까 넉넉하게 고정 */
-        padding: 40px 25px !important;
+        height: 340px !important; /* 텍스트 많으니까 넉넉하게 고정 */
+        padding: 30px 20px !important;
         background: #fff;
         border-radius: 24px;
         box-shadow: 0 15px 35px rgba(0,0,0,0.1); /* 활성화됐을 때 그림자 예쁘게 */
@@ -945,21 +947,28 @@ object-fit: cover;  }
 
     .card-inner h4 {
         font-size: 1.8rem !important;
-        margin: 15px 0 10px !important;
         color: #0055a5;
     }
 
     .card-inner p {
-        font-size: 1.35rem !important;
-        line-height: 1.6 !important;
-        color: #666;
+        font-size: 1.3rem !important;
+        line-height: 1.7 !important;
         word-break: keep-all;
         text-align: center;
     }
 
     /* 페이지네이션 간격 */
     .company-pagination {
-        bottom: 10px !important;
+        display: flex !important;
+        justify-content: center !important;
+        margin-top: 12px;
+        gap: 4px;
+    }
+    .company-pagination .swiper-pagination-bullet{
+        height: 12px !important;
+        width: 12px !important;
+        border-radius: 50% !important;
+        background: #e9ecef !important;
     }
 
 
@@ -1153,6 +1162,8 @@ object-fit: cover;  }
     height: 300px;
 }
 
-
+.card-inner:hover {
+     transform: none;
     
+}
 }

@@ -138,21 +138,17 @@ $(function() {
     });
 
     $('.m-sub-nav > li').off('click').on('click', function(e) {
-        // 화살표가 있는 메뉴(하위 메뉴가 있는 경우)만 실행
         const hasSub = $(this).find('.submenu-list').length > 0;
         
         if (hasSub) {
-            // a 태그 클릭 시 페이지 상단으로 튕기는 것 방지
             e.preventDefault(); 
             e.stopPropagation();
 
             const $thisList = $(this).find('.submenu-list');
             const isOpen = $(this).hasClass('on');
 
-            // 모든 형제 메뉴들의 'on' 클래스 제거 및 리스트 닫기 (나머지 초기화)
             $(this).siblings('li').removeClass('on').find('.submenu-list').slideUp(300);
 
-            // 현재 클릭한 메뉴 토글
             if (isOpen) {
                 $(this).removeClass('on');
                 $thisList.stop().slideUp(300);
@@ -163,33 +159,20 @@ $(function() {
         }
     });
 });
-
+//  mobile - section company swiper
 var visionSwiper = new Swiper(".vision-swiper", {
-    // 기본 모바일 설정
-    slidesPerView: "auto",
+    slidesPerView: "auto", 
     centeredSlides: true,
-    spaceBetween: -10, // 카드 사이 간격 (마이너스로 주면 더 밀착됨)
+    spaceBetween: 10, 
     loop: false,
-    initialSlide: 1,
-    pagination: {
-        el: ".company-pagination",
-        clickable: true,
-    },
-    // PC에서는 스와이퍼 파괴 수준으로 설정
+    initialSlide: 1, 
     breakpoints: {
         769: {
-            slidesPerView: 3,
-            centeredSlides: false,
-            spaceBetween: 30,
-            allowTouchMove: false, // 드래그 금지
-            enabled: false // 스와이퍼 비활성화
+            enabled: false 
         }
     }
 });
 
-// 창 크기 바뀔 때 PC 디자인 깨짐 방지용 강제 업데이트
 $(window).on('resize', function() {
     visionSwiper.update();
 });
-
-
