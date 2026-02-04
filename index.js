@@ -164,4 +164,32 @@ $(function() {
     });
 });
 
+var visionSwiper = new Swiper(".vision-swiper", {
+    // 기본 모바일 설정
+    slidesPerView: "auto",
+    centeredSlides: true,
+    spaceBetween: -10, // 카드 사이 간격 (마이너스로 주면 더 밀착됨)
+    loop: false,
+    initialSlide: 1,
+    pagination: {
+        el: ".company-pagination",
+        clickable: true,
+    },
+    // PC에서는 스와이퍼 파괴 수준으로 설정
+    breakpoints: {
+        769: {
+            slidesPerView: 3,
+            centeredSlides: false,
+            spaceBetween: 30,
+            allowTouchMove: false, // 드래그 금지
+            enabled: false // 스와이퍼 비활성화
+        }
+    }
+});
+
+// 창 크기 바뀔 때 PC 디자인 깨짐 방지용 강제 업데이트
+$(window).on('resize', function() {
+    visionSwiper.update();
+});
+
 

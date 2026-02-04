@@ -404,13 +404,17 @@ section{
     margin-bottom: 40px;
 }
 .vision-cards {
-    display: flex;
+    display: flex !important;
+    width: 100% !important;
     gap: 30px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 20px;
 }
+
 .vision-card {
-    flex: 1;
+    flex: 1 !important;
+    opacity: 1 !important;
+    transform: none !important;
 }
 .card-inner {
     display: flex;
@@ -421,7 +425,7 @@ section{
     background: #fff;
     height: 320px;
     border-radius: 24px;
-    box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
     transition: transform 0.3s ease;
 }
 .card-inner:hover {
@@ -443,6 +447,9 @@ section{
     color: #666;
     line-height: 1.6;
 }
+    .company-pagination {
+        display: none !important;
+    }
 /* (4) Contents - manage */
 #manage {
     width: 100%;
@@ -898,75 +905,63 @@ object-fit: cover;  }
         display: none !important;
     }
     
-    .pc-br {
-        display: none;
+      .pc-br { display: none; }
+
+    /* 1. Swiper 컨테이너 설정 */
+    .vision-swiper.vision-cards {
+        display: block !important; /* 중요: 기존 flex 해제해야 안 깨짐 */
+        padding: 60px 0 !important; /* 위아래 여백 (위로 올라올 공간 확보) */
+        overflow: visible !important; 
+        width: 100% !important;
     }
 
-    .vision-cards {
-        flex-direction: column; 
-        padding: 0 6px;
+    .vision-card {
+        flex: none !important;
+        width: 280px !important; /* 카드 너비 고정 (너비가 일정해야 예쁨) */
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        opacity: 0.3 !important; 
+        transform: scale(0.85) !important;
     }
-   .card-inner {
-        flex-direction: row; /* 좌:아이콘, 우:텍스트 */
-        align-items: center; /* 세로 가운데 정렬 */
-        justify-content: flex-start;
-        height: auto !important; 
-        min-height: 110px; /* 모든 카드의 최소 높이를 똑같이 맞춰버림! */
-        padding: 20px;
-        gap: 14px; /* 아이콘과 텍스트 사이 간격 좁힘 */
+
+    /* 2. [핵심] 가운데 활성화된 카드(Active) 효과 */
+    .vision-card.swiper-slide-active {
+           opacity: 1 !important;
+        transform: scale(1.05) translateY(-25px) !important;
+        z-index: 10;
+    }
+
+    /* 3. 카드 내부 디자인 (높이 고정) */
+    .card-inner {
+        flex-direction: column !important;
+        height: 350px !important; /* 텍스트 많으니까 넉넉하게 고정 */
+        padding: 40px 25px !important;
         background: #fff;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.03); /* 그림자 연하게 */
-    }
-
-
-    .card-inner:hover {
-        transform: none; /* 모바일은 호버 효과 필요 없음 */
-    }
-
-    /* 아이콘 크기 살짝 조정 */
-    .card-inner .icon-bx {
-        flex-shrink: 0; /* 아이콘이 찌그러지지 않게 */
-        width: 55px;
-        height: 55px;
-        display: flex;
+        border-radius: 24px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1); /* 활성화됐을 때 그림자 예쁘게 */
+        display: flex !important;
         align-items: center;
-        justify-content: center;
-    }
-    .card-inner .icon-bx img {
-        width: 100%;
-        height: auto;
-        margin-bottom: 0; 
-    }
-
-   .card-inner > div:nth-child(2) {
-        min-width: 80px;
-    }
-   .card-inner > div:last-child {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
         justify-content: center;
     }
 
     .card-inner h4 {
-        font-size: 1.4rem !important;
-        color: #0055a5; /* 타이틀에 포인트 컬러 */
-        text-align: left;
+        font-size: 1.8rem !important;
+        margin: 15px 0 10px !important;
+        color: #0055a5;
     }
 
     .card-inner p {
-        font-size: 1.1rem !important;
+        font-size: 1.35rem !important;
         line-height: 1.6 !important;
-        color: #777;
-        text-align: left !important;
-        margin: 0;
+        color: #666;
         word-break: keep-all;
+        text-align: center;
     }
-    
-    .vision-card-detail {
-        min-height: auto;
-        padding: 0 10px;
+
+    /* 페이지네이션 간격 */
+    .company-pagination {
+        bottom: 10px !important;
     }
+
 
     #footer .container { 
         flex-direction: column; 
