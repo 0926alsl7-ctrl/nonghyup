@@ -44,6 +44,10 @@ a{
 h1,h2,h3,h4,h5,h6{
     font-size: 100%;
 }
+/*mob */
+.m-br{
+    display: none;
+}
 
 /* (1) header ============================= */
 #header{
@@ -251,6 +255,7 @@ section{
 }
 
 .section-header{
+    padding: 0 16px;
     font-weight: 800;
     font-size: 2.8rem;
     color: #0055a5;
@@ -295,13 +300,13 @@ section{
     position: relative; 
 }
 .news-swiper .right-slide .img-box {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
 }
 .news-swiper .right-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
 }
 
 .left-slide .text-bx {
@@ -317,7 +322,7 @@ section{
     line-height: 1.3;
 }
 .story-detail {
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1.6rem;
     line-height: 1.75;
     color: #484848;
@@ -410,9 +415,10 @@ section{
 .card-inner {
     display: flex;
     flex-direction: column;
+    gap: 18px;
     align-items: center;
+    justify-content: center;
     background: #fff;
-    padding: 40px 30px;
     height: 320px;
     border-radius: 24px;
     box-shadow: 0 10px 26px rgba(0,0,0,0.05);
@@ -424,13 +430,12 @@ section{
 .card-inner .icon-bx img {
     width: 80px;
     height: 80px;
-    margin-bottom: 24px;
+    margin-bottom: 10px;
 }
 .card-inner h4 {
     font-size: 2.2rem;
     font-weight: 700;
     color: #333;
-    margin-bottom: 15px;
 }
 .card-inner p {
     text-align: center;
@@ -553,6 +558,7 @@ section{
 #customer .container{
    max-width: 1280px;
    padding: 0 20px;
+   margin: auto;
 }
 
 #customer .customer-header-txt {
@@ -787,7 +793,6 @@ object-fit: cover;  }
 .btn-scroll .arrow-up { transform: translateY(-40px); opacity: 0; }
 .btn-scroll .arrow-down { transform: translateY(0); opacity: 1; }
 
-/* 바닥에 도착했을 때(is-bottom 클래스 추가 시): 위 화살표가 보임 */
 .btn-scroll.is-bottom .arrow-up { transform: translateY(0); opacity: 1; }
 .btn-scroll.is-bottom .arrow-down { transform: translateY(40px); opacity: 0; }
 
@@ -820,6 +825,9 @@ object-fit: cover;  }
 
 }
 @media screen and (max-width: 768px) {
+    .m-br{
+        display: block;
+    }
     #m-main-nav > li > a{
         font-size: 1.26rem !important;
     }
@@ -829,9 +837,148 @@ object-fit: cover;  }
     .submenu-list li a {
         font-size: 1.1rem !important;
     }
-    #footer .container { flex-direction: column; gap: 40px; }
-    .footer-right { align-items: flex-start; width: 100%; }
-    .family-wrap { width: 100%; }
+    #news-wrap {
+        margin: 40px auto; 
+    }
+    .section-header{
+        font-size: 2.2rem !important;
+        text-align: center;
+    }
+    .news-swiper .swiper-slide {
+        flex-direction: column-reverse; 
+        height: auto; 
+        min-height: auto;
+    }
+    .news-swiper .right-slide {
+        width: 100% !important;
+        height: 300px; 
+        overflow: hidden;
+    }
+        .news-swiper .right-slide img{
+        object-position: center;
+    }
+        .news-swiper .left-slide {
+        width: 100% !important;
+        padding: 30px !important; 
+        gap: 20px;
+    }
+    .left-slide .logo-bx h5{
+        font-size: 1.2rem !important;
+    }
+    .story-title {
+        font-size: 1.8rem !important; 
+        line-height: 1.4; 
+         display: -webkit-box;
+        -webkit-line-clamp: 2; 
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        word-break: keep-all; 
+    }
+    .story-detail{
+        font-size: 1.2rem !important;
+        line-height: 1.5;
+        min-height: 3.9rem;
+         display: -webkit-box;
+        -webkit-line-clamp: 2; 
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        word-break: keep-all; 
+    }
+    .story-date{
+        font-size: 1.2rem !important;
+        margin-top: 8px;
+    }
+    .btn-news-more {
+        align-self: flex-end; 
+        margin-top: 14px;
+        font-size: 1.2rem !important;
+        padding: 8px 14px !important;
+    }
+    .right-slide-controls {
+        display: none !important;
+    }
+    
+    .pc-br {
+        display: none;
+    }
+
+    .vision-cards {
+        flex-direction: column; 
+        padding: 0 6px;
+    }
+   .card-inner {
+        flex-direction: row; /* 좌:아이콘, 우:텍스트 */
+        align-items: center; /* 세로 가운데 정렬 */
+        justify-content: flex-start;
+        height: auto !important; 
+        min-height: 110px; /* 모든 카드의 최소 높이를 똑같이 맞춰버림! */
+        padding: 20px;
+        gap: 14px; /* 아이콘과 텍스트 사이 간격 좁힘 */
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03); /* 그림자 연하게 */
+    }
+
+
+    .card-inner:hover {
+        transform: none; /* 모바일은 호버 효과 필요 없음 */
+    }
+
+    /* 아이콘 크기 살짝 조정 */
+    .card-inner .icon-bx {
+        flex-shrink: 0; /* 아이콘이 찌그러지지 않게 */
+        width: 55px;
+        height: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .card-inner .icon-bx img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 0; 
+    }
+
+   .card-inner > div:nth-child(2) {
+        min-width: 80px;
+    }
+   .card-inner > div:last-child {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .card-inner h4 {
+        font-size: 1.4rem !important;
+        color: #0055a5; /* 타이틀에 포인트 컬러 */
+        text-align: left;
+    }
+
+    .card-inner p {
+        font-size: 1.1rem !important;
+        line-height: 1.6 !important;
+        color: #777;
+        text-align: left !important;
+        margin: 0;
+        word-break: keep-all;
+    }
+    
+    .vision-card-detail {
+        min-height: auto;
+        padding: 0 10px;
+    }
+
+    #footer .container { 
+        flex-direction: column; 
+        gap: 40px; 
+    }
+    .footer-right { 
+        align-items: flex-start; 
+        width: 100%; 
+    }
+    .family-wrap { 
+        width: 100%; 
+    }
     .family-list{
         max-height: auto;
     }
@@ -847,6 +994,7 @@ object-fit: cover;  }
         display: block;
         width: 100%;
     }
+    
 }
 
 @media screen and (max-width: 1280px){
@@ -908,9 +1056,7 @@ object-fit: cover;  }
          font-weight: 500; 
         transition: padding 0.3s ease-in-out;
         }
-    #m-main-nav > li.active { 
-       
-    }
+
     #m-main-nav > li.active > a { 
         color: #0055a5;
         padding-left: 8px;
@@ -963,10 +1109,55 @@ object-fit: cover;  }
     section{
         width: 100%;
     }
-    .news-swiper .left-slide
+    .section-header{
+        font-size: 2.4rem;
+    }
+    .news-swiper .left-slide {
+    width: 50%; 
+    padding: 40px;
+    }   
+    .news-swiper .right-slide{
+        width: 50%;
+    }
     .left-slide .logo-bx h5{
         font-size: 1.4rem;
     }
+    .story-title{
+        font-size: 2.4rem;
+    }
+    .story-date{
+        font-size: 1.3rem;
+    }
+    .story-detail{
+        font-size: 1.4rem;
+    }
+    .btn-news-more{
+        font-size: 1.2rem;
+        padding: 10px 14px;
+    }
+    .btn-news-more > img{
+        width: 14px;
+        height: 14px;
+    }
+    #company {
+    margin: 64px auto;
+}
+#company .company-header-txt{
+    margin-bottom: 30px;
+}
+.vision-cards{
+    gap: 20px;
+}
+.card-inner h4{
+    font-size: 1.8rem;
+}
+.card-inner p{
+    font-size: 1.4rem;
+}
+.card-inner{
+    height: 300px;
+}
+
 
     
 }
