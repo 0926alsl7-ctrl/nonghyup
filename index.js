@@ -73,17 +73,19 @@ var newsSwiper = new Swiper(".news-swiper", {
 });
 // section - customer ===============
 $(function() {
+    // 1. 카드 클릭 시 active 추가
     $('.customer-box').on('click', function(e) {
+        e.stopPropagation(); // 클릭 이벤트가 부모로 퍼지는 것 방지
         $('.customer-box').removeClass('active');
-        
         $(this).addClass('active');
+    });
 
-        const link = $(this).find('a').attr('href');
-        setTimeout(function() {
-            // window.location.href = link; 
-        }, 400);
+    // 2. 카드 외의 영역(바탕화면 등) 클릭 시 active 제거 (초기화)
+    $(document).on('click', function() {
+        $('.customer-box').removeClass('active');
     });
 });
+
 // footer - 패밀리 사이트 토글  ==================================
 function toggleFamily() {
     const wrap = document.querySelector('.family-wrap');
