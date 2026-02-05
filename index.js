@@ -71,7 +71,19 @@ var newsSwiper = new Swiper(".news-swiper", {
         }
     }
 });
+// section - customer ===============
+$(function() {
+    $('.customer-box').on('click', function(e) {
+        $('.customer-box').removeClass('active');
+        
+        $(this).addClass('active');
 
+        const link = $(this).find('a').attr('href');
+        setTimeout(function() {
+            // window.location.href = link; 
+        }, 400);
+    });
+});
 // footer - 패밀리 사이트 토글  ==================================
 function toggleFamily() {
     const wrap = document.querySelector('.family-wrap');

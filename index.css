@@ -593,8 +593,8 @@ section{
     justify-content: flex-start; 
     height: 400px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-    transition: all 0.4s ease;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .kori-unit {
     display: flex;
@@ -613,12 +613,13 @@ section{
 
 .bubble-wrap {
     background: #fff;
-    border: 2px solid #e9ecef;
+    border: none;
     padding: 20px;
     border-radius: 20px;
     position: relative;
     margin-bottom: 30px;
     opacity: 0.9;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
     animation: float 3s ease-in-out infinite;
 }
 
@@ -636,13 +637,11 @@ section{
     border: solid transparent;
 }
 .bubble-wrap::after {
-    border-top-color: #fff;
-    border-width: 10px;
+  border-top-color: #fff;
+    filter: drop-shadow(0 5px 3px rgba(0,0,0,0.05));
 }
 .bubble-wrap::before {
-    border-top-color: #e9ecef; 
-    border-width: 12px;
-    margin-left: 0px; 
+ display: none; 
 }
 .bubble-wrap p {
     font-size: 1.4rem;
@@ -686,6 +685,13 @@ section{
 }
 
 .customer-box:hover .arrow-svg {
+    animation: arrowMove 0.4s ease forwards;
+}
+.customer-box.active .arrow-circle {
+    background: #0055a5;
+    color: #fff;
+}
+.customer-box.active .arrow-svg {
     animation: arrowMove 0.4s ease forwards;
 }
 @keyframes arrowMove {
@@ -976,6 +982,45 @@ object-fit: cover;  }
         flex: 0 0 280px; 
         height: 320px !important;
         scroll-snap-align: start; 
+    }
+        .customer-body {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .customer-box {
+        height: auto; /* 높이 고정 해제 */
+        padding: 25px;
+        flex-direction: row; /* 가로 배치 */
+        align-items: center;
+        text-align: left;
+    }
+
+    .kori-unit {
+        flex-direction: row; /* 내부 요소 가로 정렬 */
+        justify-content: flex-start;
+        gap: 20px;
+    }
+
+    .kori-img {
+        width: 70px; /* 이미지 축소 */
+        height: auto;
+        margin-bottom: 0;
+    }
+
+    /* 모바일에서는 말풍선 생략하거나 디자인 변경 (공간 부족 시) */
+    .bubble-wrap {
+        display: none; /* 모바일은 텍스트가 너무 많아지니 말풍선은 과감히 생략 추천 */
+    }
+
+    .kori-title {
+        font-size: 1.7rem !important;
+        margin-bottom: 5px;
+    }
+
+    .kori-btn {
+        margin-top: 5px;
+        font-size: 1.2rem;
     }
 
     #footer .container { 
