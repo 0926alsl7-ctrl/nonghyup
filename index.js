@@ -51,7 +51,7 @@ var newsSwiper = new Swiper(".news-swiper", {
     loop: true,
     speed: 800,
     autoplay: {
-        delay: 7000, 
+        delay: 6000, 
         disableOnInteraction: false,
     },
     pagination: {
