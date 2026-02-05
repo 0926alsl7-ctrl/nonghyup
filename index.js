@@ -1,6 +1,6 @@
 // scroll events 초기화 ==================================
 AOS.init({
-    duration: 2000, 
+    duration: 1200, 
     once: false,
     easing: 'ease-in-out' 
 });
@@ -73,16 +73,22 @@ var newsSwiper = new Swiper(".news-swiper", {
 });
 // section - customer ===============
 $(function() {
-    // 1. 카드 클릭 시 active 추가
     $('.customer-box').on('click', function(e) {
-        e.stopPropagation(); // 클릭 이벤트가 부모로 퍼지는 것 방지
+        e.stopPropagation();
+        
+        $('.customer-body').addClass('is-interaction is-active');
+        
         $('.customer-box').removeClass('active');
         $(this).addClass('active');
     });
 
-    // 2. 카드 외의 영역(바탕화면 등) 클릭 시 active 제거 (초기화)
     $(document).on('click', function() {
+        $('.customer-body').removeClass('is-active');
         $('.customer-box').removeClass('active');
+
+        setTimeout(function() {
+            $('.customer-body').removeClass('is-interaction');
+        }, 300); 
     });
 });
 
