@@ -183,17 +183,19 @@ $(function() {
 //  mobile - section company swiper
 var visionSwiper = new Swiper(".vision-swiper", {
     slidesPerView: "auto", 
-    centeredSlides: true,
-    spaceBetween: 10, 
-    loop: false,
-    initialSlide: 1, 
+    centeredSlides: true, 
+    spaceBetween: 15,     
+    loop: false,          
+    initialSlide: 0,      
+    
+    // 이 옵션들을 추가하면 정렬이 훨씬 정확해져
+    centerInsufficientSlides: true,
+    observer: true,
+    observeParents: true,
+
     breakpoints: {
         769: {
             enabled: false 
         }
     }
-});
-
-$(window).on('resize', function() {
-    visionSwiper.update();
 });

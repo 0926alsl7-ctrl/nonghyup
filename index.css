@@ -408,22 +408,11 @@ section{
     margin-bottom: 30px;
 }
 .vision-cards {
-    display: flex !important;
     width: 100% !important;
     margin: 0 auto;
-    padding: 20px 0;
     overflow: visible !important;
 }
-.vision-cards .swiper-wrapper{
-    gap: 20px !important;
-}
 
-.vision-card {
-    flex: 1 !important;
-    opacity: 1 !important;
-    transform: none !important;
-          
-}
 .card-inner {
     display: flex;
     flex-direction: column;
@@ -431,7 +420,7 @@ section{
     align-items: center;
     justify-content: center;
     background: #fff;
-            box-shadow: 
+    box-shadow: 
         0 4px 10px rgba(0, 0, 0, 0.05), 
         0 2px 6px rgba(0, 0, 0, 0.05);
     height: 320px;
@@ -952,26 +941,28 @@ object-fit: cover;  }
     }
     
       .pc-br { display: none; }
-      .vision-cards .swiper-wrapper{
-        gap: 0 !important;
-      }
 
     .vision-swiper.vision-cards {
         display: block !important; 
         padding: 50px 0 !important; 
-        overflow: visible !important; 
-        width: 100% !important;
     }
+    .vision-cards .swiper-wrapper{
+        gap: 0 !important;
+        display: flex !important;
+        justify-content: flex-start !important;
 
+      }
     .vision-card {
         flex: none !important;
-        width: 250px !important; 
+        flex-shrink: 0 !important;
+        width: 260px !important; 
         height: auto;
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        opacity: 0.3 !important; 
+    }
+    .vision-card:not(.swiper-slide-active) {
+        opacity: 0.3 !important;
         transform: scale(0.8) !important;
     }
-
     .vision-card.swiper-slide-active {
         opacity: 1 !important;
         transform: scale(1.0) translateY(-25px) !important;
@@ -1118,6 +1109,26 @@ object-fit: cover;  }
         height: 54px;
     }
     
+}
+@media screen and (min-width: 769px) {
+    .vision-cards{
+        display: flex !important;
+        justify-content: space-between !important;
+        padding: 20px 0;
+    }
+    .vision-cards .swiper-wrapper {
+        display: flex !important;
+        gap: 24px !important;
+        transform: none !important; 
+    }
+
+    .vision-card {
+        margin: 0 !important;
+        flex: 1 !important; 
+        width: auto !important; 
+        opacity: 1 !important;
+        transform: none !important;
+    }
 }
 
 @media screen and (max-width: 1024px){
