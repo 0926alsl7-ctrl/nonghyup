@@ -183,19 +183,15 @@ $(function() {
 //  mobile - section company swiper
 var visionSwiper = new Swiper(".vision-swiper", {
     slidesPerView: "auto", 
-    centeredSlides: true, 
-    spaceBetween: 15,     
-    loop: false,          
-    initialSlide: 0,      
+    centeredSlides: true, // 2번을 눌렀을 때 중앙으로 오게 하려면 이게 'true'여야 함!
+    spaceBetween: 20,     // 간격 살짝 넓힘
+    initialSlide: 0,      // 시작은 무조건 1번
+    slidesOffsetBefore: 0, // 일단 0으로 두고 아래 CSS 패딩으로 조절할게
     
-    // 이 옵션들을 추가하면 정렬이 훨씬 정확해져
-    centerInsufficientSlides: true,
-    observer: true,
-    observeParents: true,
-
     breakpoints: {
         769: {
             enabled: false 
         }
     }
 });
+
