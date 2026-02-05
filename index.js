@@ -93,17 +93,18 @@ $(function() {
 });
 
 // footer - 패밀리 사이트 토글  ==================================
-function toggleFamily() {
-    const wrap = document.querySelector('.family-wrap');
-    wrap.classList.toggle('active');
-}
+   $('.family-btn').on('click', function(e) {
+        e.stopPropagation(); 
+        $('.family-wrap').toggleClass('active');
+    });
 
-window.addEventListener('click', (e) => {
-    const wrap = document.querySelector('.family-wrap');
-    if (!wrap.contains(e.target)) {
-        wrap.classList.remove('active');
-    }
-});
+    $('.family-list').on('click', function(e) {
+        e.stopPropagation();
+    });
+
+    $(document).on('click', function() {
+        $('.family-wrap').removeClass('active');
+    });
 
 // floating  ==================================
 const scrollBtn = document.getElementById('scrollBtn');

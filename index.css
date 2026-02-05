@@ -16,6 +16,10 @@ body{
     -webkit-font-smoothing: antialiased;    
 }
 html,body{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    min-height: 100%;
     width: 100%;
     height: auto;
     background: #fff;
@@ -724,8 +728,9 @@ section{
     50% { transform: translateX(-20px); opacity: 0; }
     100% { transform: translateX(0); opacity: 1; }
 }
-/*footer*/
+/* footer */
 #footer{
+    margin-bottom: 0 !important;
     margin-top: 60px;
     min-width: 100%;
     width: 100%;
@@ -766,10 +771,19 @@ section{
 .family-list {
     position: absolute; bottom: 45px; left: 0; width: 100%; 
     background: #fff; border: 1px solid #ddd; border-bottom: none;
-    display: none; max-height: 320px; overflow-y: auto; z-index: 100;
-    scrollbar-width: none; height: auto;
+    max-height: 0;     overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    z-index: 100;
+    scrollbar-width: none; 
 }
-.family-wrap.active .family-list { display: block; }
+.family-wrap.active .family-list {
+    max-height: 280px;
+    visibility: visible;
+    opacity: 1;
+    overflow-y: auto; 
+}
 .family-list li a { display: block; padding: 10px 15px; font-size: 1.3rem; color: #666; }
 .family-list li a:hover { background: #f4f7fa; color: #0055a5; }
 
@@ -1055,12 +1069,13 @@ object-fit: cover;  }
         border-color: #0055a5;
     }
     #footer{
-        padding: 50px 0;
+        padding: 46px 0;
     }
     #footer .container { 
         flex-direction: column; 
         gap: 40px; 
     }
+      .footer-nav { gap: 10px 15px; } 
     .footer-nav a, .copyright .footer-info, .copyright .copy-txt{
         font-size: 1.2rem;
     }
@@ -1077,11 +1092,32 @@ object-fit: cover;  }
     .family-wrap { 
         width: 100%; 
     }
-    .family-list{
-        max-height: 240px;
+
+    .family-wrap.active .family-list{
+        max-height: 220px;
     }
     .sns-wrap { order: 1; }
     .icon { order: 2; }
+     .icon-wrap {
+        width: 100%;
+        justify-content: space-between; 
+        flex-direction: row !important;
+    }
+    .floating-menu{
+        gap: 10px;
+    }
+    .btn-chat{
+        width: 66px;
+        height: 66px;
+    }
+    .chat-bubble{
+        font-size: 1.2rem;
+    }
+    .btn-scroll{
+        width: 54px;
+        height: 54px;
+    }
+    
 }
 
 @media screen and (max-width: 1024px){
@@ -1310,5 +1346,8 @@ object-fit: cover;  }
 }
 #footer {
     margin-top: 20px;
+}
+.floating-menu{
+    right: 20px;
 }
 }
