@@ -183,10 +183,10 @@ $(function() {
 //  mobile - section company swiper
 var visionSwiper = new Swiper(".vision-swiper", {
     slidesPerView: "auto", 
-    centeredSlides: true, // 2번을 눌렀을 때 중앙으로 오게 하려면 이게 'true'여야 함!
-    spaceBetween: 20,     // 간격 살짝 넓힘
-    initialSlide: 0,      // 시작은 무조건 1번
-    slidesOffsetBefore: 0, // 일단 0으로 두고 아래 CSS 패딩으로 조절할게
+    centeredSlides: true, 
+    spaceBetween: 20, 
+    initialSlide: 0, 
+    slidesOffsetBefore: 0, 
     
     breakpoints: {
         769: {

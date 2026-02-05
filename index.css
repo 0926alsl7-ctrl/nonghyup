@@ -4,11 +4,13 @@
 box-sizing: border-box;
 }
 html{
+    background: #f8f9fa;
 font-size: 62.5%;
 }
 body{
     overflow: visible;
     font-size: 13pt;
+    background: #fff;
     color: #484848;
     line-height: 1.45;
     font-family: 'Apple SD Gothic Neo', sans-serif;
@@ -22,7 +24,6 @@ html,body{
     min-height: 100%;
     width: 100%;
     height: auto;
-    background: #fff;
 }
 ul,li{
     list-style: none;
@@ -722,6 +723,7 @@ section{
     margin-bottom: 0 !important;
     margin-top: 60px;
     min-width: 100%;
+    height: 100%;
     width: 100%;
     padding: 60px 0; 
     background: #f8f9fa;
@@ -810,17 +812,39 @@ object-fit: cover;  }
 
 .chat-bubble {
     position: absolute;
-    right: 90px; top: 50%; transform: translateY(-50%);
-    background: #333; color: #fff;
-    padding: 8px 15px; border-radius: 10px;
-    font-size: 1.3rem; white-space: nowrap;
-    opacity: 0; visibility: hidden; transition: 0.3s;
+    bottom: 85px; /* 버튼 위로 이동 */
+    left: 50%;
+    transform: translateX(-50%); /* 가로 중앙 정렬 */
+    right: auto; top: auto;
+    background: #333;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 1.3rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+    text-align: center;
 }
+
 .chat-bubble::after {
-    content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%);
-    border-left: 6px solid #333; border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+    content: '';
+    position: absolute;
+    bottom: -5px; /* 아래로 */
+    left: 50%;
+    transform: translateX(-50%);
+    border-top: 6px solid #333; /* 화살표 방향 아래로 */
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: none;
+    right: auto; top: auto;
 }
-.chatbot:hover .chat-bubble { opacity: 1; visibility: visible; }
+.chatbot:hover .chat-bubble {
+    opacity: 1;
+    visibility: visible;
+    bottom: 95px; /* 살짝 떠오르는 효과 */
+}
 
 .btn-scroll {
     width: 60px; height: 60px;
@@ -1073,8 +1097,22 @@ object-fit: cover;  }
     .family-btn{
         font-size: 1.2rem;
     }
+    .family-list {
+        position: relative !important; 
+        top: 0 !important;             
+        bottom: auto !important;
+        border-bottom: 1px solid #ddd !important; 
+        border-top: none !important;
+    }
+    .family-wrap.active .family-list{
+        max-height: 220px;
+         margin-top: -1px; 
+    }
     .family-list li a{
         font-size: 1.2rem;
+    }
+    .family-list > li:last-child a{
+        padding-bottom: 14px;
     }
     .footer-right { 
         align-items: flex-start; 
@@ -1084,9 +1122,6 @@ object-fit: cover;  }
         width: 100%; 
     }
 
-    .family-wrap.active .family-list{
-        max-height: 220px;
-    }
     .sns-wrap { order: 1; }
     .icon { order: 2; }
      .icon-wrap {
@@ -1102,7 +1137,11 @@ object-fit: cover;  }
         height: 66px;
     }
     .chat-bubble{
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+        padding: 8px 12px;
+    }
+    .chatbot:hover .chat-bubble {
+        bottom: 84px;
     }
     .btn-scroll{
         width: 54px;
