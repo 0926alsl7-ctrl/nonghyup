@@ -55,9 +55,10 @@ section{
     position: relative;
     display: block;
 }
+/* header */
 header{
     width: 100%;
-    height: 100px;
+    height: 90px;
     background: rgba(255, 255, 255, 0.6);
     border-bottom: 1px solid #eee;
     position: fixed;
@@ -67,7 +68,7 @@ header{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 }
 header.open{
     opacity: 1;
@@ -82,17 +83,23 @@ header.open{
     align-items: center;
 }
 
-.nh_bank {
+.util_box{
     position: absolute;
     top: 15px;
     right: 40px;
     z-index: 10001;
 }
+.util_box ul{
+    display: flex;
+    gap: 20px;
+}
 .nh_bank img {
     width: 52px;
     height: 12px; }
 
-.logo { padding-right: 50px;}
+header .logo { 
+    padding-left: 34px;
+}
 header .logo a{
     display: block;
     width: 140px;
@@ -105,8 +112,10 @@ header .logo a{
 }
 
 .gnb {
+    position: relative;
     display: flex;
-      justify-content: center; /* 로고 옆에 바로 붙게 하거나 center로 조절 */
+    align-items: center;
+    justify-content: center; /* 로고 옆에 바로 붙게 하거나 center로 조절 */
     gap: 40px;
 }
 
@@ -114,13 +123,12 @@ header .logo a{
     font-size: 18px;
     font-weight: 700;
     color: #333;
-    line-height: 100px; /* 헤더 높이랑 맞춤 */
 }
 
 /* 서브메뉴 영역 */
 .depth2_wrap {
      position: absolute;
-    top: 60px; /* gnb 위치에 맞춰 조정 */
+    top: 100%; /* gnb 위치에 맞춰 조정 */
     left: 50%;
     transform: translateX(-50%);
     width: 100vw;
