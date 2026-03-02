@@ -65,51 +65,45 @@ section {
 header {
   width: 100%;
   height: 100px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(4px);
+  background: transparent;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 10000;
   transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+header.open{
+  background: #fff;
+}
+header.open::after {
+  background: #fff;
+  content: "";
+  position: absolute;
+  top: 100px;
+  left: -50vw; 
+  right: -50vw; 
+  height: 400px;
+  z-index: -1;
+}
 .header_inner {
   width: 100%;
-  height: 100px;
+  height: 86px;
+  padding-bottom: 14px;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: end;
   position: relative;
 }
 header .logo {
-  margin-right: 60px;
+  margin-right: 80px;
 }
 header .logo a {
   display: block;
   width: 136px;
   height: 40px;
   background: url(images/logo_nh_main_new.png) no-repeat center/contain;
-}
-
-.util_box {
-  position: absolute;
-  top: 14px;
-  right: 20px;
-}
-.util_box ul {
-  display: flex;
-  gap: 20px;
-}
-.util_box img {
-  width: 64px;
-  height: 14px;
-  opacity: 0.7;
-  transition: 0.3s;
-}
-.util_box img:hover {
-  opacity: 1;
 }
 .header_wrap {
   flex: 1;
@@ -119,7 +113,7 @@ header .logo a {
 }
 .gnb > li {
   width: 160px;
-  padding: 6px 0;
+  padding: 10px 0;
   position: relative;
 }
 
@@ -129,31 +123,11 @@ header .logo a {
   position: relative;
   font-size: 18px;
   font-weight: 700;
-  color: #333;
+  color: rgb(244, 244, 244);
   transition: 0.3s;
 }
-
-@media screen and (min-width: 1025px) {
-  .gnb > li:hover > a {
-    color: #00853e;
-  }
-  .gnb > li > a::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: -6px;
-    height: 10px;
-    width: calc(100% + 12px);
-    background: #ffd900;
-    z-index: -1;
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    opacity: 0.6;
-  }
-  .gnb > li:hover > a::after {
-    transform: scaleX(1);
-  }
+header.open .gnb > li > a {
+  color: #333;
 }
 
 .depth2_wrap {
@@ -178,17 +152,6 @@ header.open .depth2_wrap {
   width: 100%;
   display: flex;
   flex-direction: column;
-}
-header.open::after {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  content: "";
-  position: absolute;
-  top: 100px;
-  left: -50vw; /* 화면 왼쪽 끝까지 */
-  right: -50vw; /* 화면 오른쪽 끝까지 */
-  height: 400px;
-  z-index: -1;
 }
 
 .depth2_list li {
@@ -225,7 +188,31 @@ header.open::after {
 .m_header {
   display: none;
 }
-
+@media screen and (min-width: 1025px) {
+  .gnb > li:hover > a {
+    color: #00853e;
+  }
+  .gnb > li > a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -6px;
+    height: 10px;
+    width: calc(100% + 12px);
+    background: #ffd900;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0.6;
+  }
+  .gnb > li:hover > a::after {
+    transform: scaleX(1);
+  }
+  .m_util_box{
+    display: none;
+  }
+}
 @media screen and (max-width: 1024px) {
   header {
     height: 70px;
@@ -233,6 +220,7 @@ header.open::after {
   .header_inner {
     height: 70px;
     padding: 0 20px;
+    align-items: center;
     justify-content: space-between;
   }
   .util_box {
@@ -268,7 +256,8 @@ header.open::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 0 20px;
+    height: 70px;
     background: #00853e;
   }
   header .logo {
@@ -281,6 +270,8 @@ header.open::after {
     background: url(images/logo_nh_main_new.png) no-repeat center/contain;
   }
   .m_header .m_logo img {
+    display: block;
+    width: 82px;
     height: 26px;
     filter: brightness(0) invert(1);
   }
@@ -307,7 +298,21 @@ header.open::after {
   .m_close span::after {
     transform: rotate(-45deg);
   }
-
+  .m_util_box{
+    display: block;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+  }
+  .m_util_box ul{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+  .m_util_box img{
+    width: 74px;
+    height: auto;
+  }
   .header_wrap .gnb {
     display: block;
     padding: 10px 0;
@@ -384,12 +389,9 @@ header.open::after {
 }
 
 .section01 .video-container {
-  position: relative;
-  width: 100%;
-  height: 70%;
-  overflow: hidden;
-  z-index: 0;
-  top: -30px;
+    position: absolute; top: 0; left: 0;
+    cursor: pointer;
+    width: 100%; height: 100vh; z-index: 1;
 }
 .section01 .video-container video {
   position: absolute;
@@ -402,4 +404,100 @@ header.open::after {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.video-overlay {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.2); /* 영상이 너무 밝으면 0.3~0.4로 조절 */
+}
+
+.video-progress-wrap {
+    position: absolute; bottom: 156px; left: 50%;
+    transform: translateX(-50%);
+    width: 100%; max-width: 1200px; height: 4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.2); z-index: 10;
+}
+.video-progress-bar {
+    width: 0%; height: 100%; background: #ffd900; /* 농협 포인트 컬러 */
+}
+
+.main-quick-menu {
+    position: absolute; bottom: 64px; left: 50%;
+    transform: translateX(-50%); z-index: 10;
+    width: 100%; max-width: 1200px;
+}
+.quick-list { display: flex; }
+.quick-list li { flex: 1; }
+.quick-list li a {
+    position: relative;
+    display: block; 
+    padding: 24px 14px; 
+    border-radius: 2px;
+    color: rgba(255, 255, 255, 0.7); /* 평소엔 살짝 투명하게 (힘 빼기) */
+    font-size: 16px; 
+    font-weight: 500; 
+    transition: 0.3s ease;
+}
+.quick-list li a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px; /* 2px보다 1px이 더 날렵하고 세련돼 보임 */
+    background: #fff; 
+    transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* 더 쫀득한 움직임 */
+}
+.quick-list li a:hover::after {
+    width: 100%; /* 전체 너비로 확장 */
+}
+.quick-list li a:hover {
+    color: #ffffff; /* 글자색 완전 흰색으로 선명하게 */
+    background: rgba(255, 255, 255, 0.08); /* 배경도 아주 살짝만 밝아지게 */
+    letter-spacing: 0.5px; /* 호버 시 글자 간격 아주 살짝 벌리면 더 고급짐 */
+}
+.quick-list li a span { 
+    color: rgba(255, 255, 255, 0.4);
+    transition: 0.3s;
+    font-size: 12px; 
+    margin-right: 10px; 
+    opacity: 0.6; 
+    font-family: 'Arial';
+}
+.quick-list li a:hover span {
+    color: #fff;
+    opacity: 1;
+}
+
+@media screen and (max-width: 1024px) {
+    /* 게이지 바 위치 조정 */
+    .video-progress-wrap {
+        bottom: 180px; /* 모바일은 메뉴가 2줄이라 좀 더 위로 */
+        width: 90%;
+    }
+
+    /* 퀵 메뉴를 2줄 2칸으로 변경 */
+    .main-quick-menu {
+        bottom: 40px;
+        width: 90%;
+    }
+    .quick-list {
+        display: flex;
+        flex-wrap: wrap; /* 줄바꿈 허용 */
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .quick-list li {
+        flex: none;
+        width: 50%; /* 반씩 차지 */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .quick-list li a {
+        padding: 15px 10px;
+        font-size: 14px;
+    }
+    .quick-list li a span {
+        display: block; /* 숫자를 위로 */
+        margin-bottom: 4px;
+    }
 }
