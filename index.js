@@ -1,15 +1,30 @@
-$(function () {
-  $(".gnb").on("mouseenter", function () {
-    if ($(window).width() > 1024) {
-      $("#header").addClass("open");
-    }
-  });
+$(document).ready(function() {
+  const video = document.getElementById('intro_video');
+    const progressBar = $('.video-progress-bar');
+    let isCounted = false;
 
-  $("#header").on("mouseleave", function () {
-    if ($(window).width() > 1024) {
-      $(this).removeClass("open");
+      function startCount() {
+        if(isCounted) return;
+        $('.count').each(function() {
+            const $this = $(this);
+            const countTo = parseInt($this.attr('data-count'));
+            $({ countNum: 0 }).animate({ countNum: countTo }, {
+                duration: 2000,
+                easing: 'swing',
+                step: function() { $this.text(Math.floor(this.countNum).toLocaleString()); },
+                complete: function() { $this.text(countTo.toLocaleString()); }
+            });
+        });
+        isCounted = true;
     }
-  });
+
+      $(".gnb").on("mouseenter", function () {
+        if ($(window).width() > 1024) $("#header").addClass("open");
+    });
+    $("#header").on("mouseleave", function () {
+        if ($(window).width() > 1024) $(this).removeClass("open");
+    });
+
 
   $(".all_menu a").on("click", function (e) {
     e.preventDefault();
@@ -38,19 +53,15 @@ $(".header_wrap .gnb > li > a").off("click").on("click", function (e) {
         $targetDepth.stop().slideToggle(300);
     }
 });
-});
-$(document).ready(function() {
-    const video = document.getElementById('intro_video');
-    const progressBar = $('.video-progress-bar');
+
       $('.video-container').on('click', function() {
         if (video.paused) {
             video.play();
-            video.muted = false; // 재생할 때 소리 켜기 (브라우저 정책 대응)
+            video.muted = false; 
         } else {
             video.pause();
         }
     });
-
 
     if (video) {
         video.addEventListener('timeupdate', function() {
@@ -59,18 +70,34 @@ $(document).ready(function() {
         });
     }
 
-    $('#fullpage').fullpage({
-        autoScrolling: true,
-        scrollHorizontally: true,
+    
+ $('#fullpage').fullpage({
         navigation: false,
-        navigationPosition: 'left',
         anchors: ['intro', 'information', 'news', 'about', 'footer'],
         
-        afterLoad: function(origin, destination, direction) {
-            if(destination.anchor == 'intro'){
-                video.play();
+        // 2.9.7 버전은 파라미터가 (anchorLink, index) 순서야
+        afterLoad: function(anchorLink, index) {
+            // 인트로 섹션 (첫번째)
+            if(anchorLink == 'intro'){
+                $('#header').removeClass('dark');
+                if(video) video.play();
+            }
+            // 그 외 모든 섹션
+            else {
+                $('#header').addClass('dark'); 
+                if(anchorLink == 'news') {
+                    $('#header').removeClass('dark'); // 뉴스 섹션에서는 헤더 밝게 유지
+                }
+            }
+
+            // 섹션 2 (information) 진입 시
+            if (anchorLink == 'information') {
+                startCount(); // 숫자 카운팅
+                $('.card_container').addClass('active'); // 카드 애니메이션
             }
         }
     });
 });
+
+
 
