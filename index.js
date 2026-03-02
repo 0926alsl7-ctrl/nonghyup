@@ -18,10 +18,10 @@ $(document).ready(function() {
         isCounted = true;
     }
 
-      $(".gnb").on("mouseenter", function () {
-        if ($(window).width() > 1024) $("#header").addClass("open");
-    });
-    $("#header").on("mouseleave", function () {
+      $("#header").on("mouseenter", function () {
+        if ($(window).width() > 1024) $(this).addClass("open");
+      });
+      $("#header").on("mouseleave", function () {
         if ($(window).width() > 1024) $(this).removeClass("open");
     });
 

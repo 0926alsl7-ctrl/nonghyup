@@ -18,7 +18,7 @@ html {
 body {
   width: 100%;
   font-family: "NonghyupFont", sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
 }
@@ -77,7 +77,7 @@ header.open::after {
   top: 100px;
   left: -50vw;
   right: -50vw;
-  height: 400px;
+  height: 340px;
   z-index: -1;
 }
 header.dark {
@@ -90,18 +90,19 @@ header.dark .gnb > li > a {
 .header_inner {
   width: 100%;
   height: 100px;
-  padding: 0 40px;
   display: flex;
   align-items: center;
   position: relative;
+  max-width: 960px;
+  margin: 0 auto;
 }
 header .logo {
-  padding-right: 40px;
+  padding-right: 60px;
 }
 header .logo a {
   display: block;
-  width: 136px;
-  height: 40px;
+  width: 128px;
+  height: 32px;
   background: url(images/logo_nh_main_new.png) no-repeat center/contain;
 }
 .header_wrap {
@@ -109,7 +110,7 @@ header .logo a {
 }
 .gnb {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .gnb > li {
   width: 140px;
@@ -507,14 +508,11 @@ header.open .depth2_wrap {
 
 /* ***************section02 *************** */
 .section02 .inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding-top: 100px;
+  padding-top: 40px;
 }
 .sec_title {
-  text-align: left;
-  padding-left: 50px;
-  margin-bottom: 80px;
+  text-align: center;
+  margin-bottom: 40px;
   opacity: 0;
   transform: translateY(50px) scale(0.98);
   transition: all 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -536,12 +534,13 @@ header.open .depth2_wrap {
   color: #555;
   margin-top: 10px;
   font-weight: 300;
+  display: none;
 }
 
 .stats_container {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 70px;
+  margin-bottom: 60px;
   padding: 0 30px;
   position: relative;
 }
@@ -551,7 +550,7 @@ header.open .depth2_wrap {
   flex-direction: column;
   align-items: center;
   flex: 1;
-  gap: 60px;
+  gap: 20px;
 }
 
 .num_box {
@@ -560,28 +559,17 @@ header.open .depth2_wrap {
   align-items: baseline;
   position: relative;
 }
-.num_box::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 0;
-  background: #00853e;
-  transition: height 1s ease-out 0.5s;
-}
+
 .section02.active .num_box::before {
   height: 50px;
 }
 .stat_item .count {
   display: block;
-  font-size: 80px;
+  font-size: 58px;
   font-weight: 800;
   color: #00853e;
   line-height: 1;
   letter-spacing: -3px;
-  margin-bottom: 20px;
 }
 .stat_item .stat_name {
   font-size: 24px;
