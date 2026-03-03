@@ -9,15 +9,9 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.min.css"
-    />
     <link rel="stylesheet" href="style.css" />
     <script src="jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.min.js"></script>
-    <script src="index.js" defer></script>
   </head>
   <body>
     <div id="wrap">
@@ -134,146 +128,169 @@
             </div>
           </div>
         </header>
-
+        <!--  -->
         <div id="dimmed"></div>
         <div id="container">
-          <div id="fullpage" class="fullpage-wrapper">
-            <div class="section section01" data-anchor="intro">
-              <div class="video-container">
-                <video
-                  src="/images/intro_new.mp4"
-                  id="intro_video"
-                  muted
-                  autoplay
-                  loop
-                  playsinline
-                ></video>
-                <div class="video-overlay"></div>
-              </div>
-              <div class="video-progress-wrap">
-                <div class="video-progress-bar"></div>
-              </div>
-              <div class="main-quick-menu">
-                <ul class="quick-list">
-                  <li>
-                    <a href="#information"><span>01</span>농협소개</a>
-                  </li>
-                  <li>
-                    <a href="#news"><span>02</span>농협소식</a>
-                  </li>
-                  <li>
-                    <a href="#about"><span>03</span>지속가능경영</a>
-                  </li>
-                  <li>
-                    <a href="#footer"><span>04</span>인재채용</a>
-                  </li>
-                </ul>
-              </div>
+          <div class="section section01" id="intro">
+            <div class="video-container">
+              <video
+                src="/images/intro_new.mp4"
+                id="intro_video"
+                muted
+                autoplay
+                loop
+                playsinline
+              ></video>
+              <div class="video-overlay"></div>
+              <button class="video-ctrl-btn paused"></button>
             </div>
-            <div class="section section02" data-anchor="information">
-              <div class="inner">
-                <div class="sec_title">
-                  <h2 class="main_title">NH</h2>
-                  <p class="sub_title">
-                    농업인과 함께, 국민과 함께 성장하는 든든한 농협
-                  </p>
-                </div>
-
-                <div class="stats_container">
-                  <div class="stat_item">
-                    <p class="stat_name">농협의 역사</p>
-                    <div class="num_box">
-                      <span class="count" data-count="65">0</span>
-                      <em class="unit">년</em>
-                    </div>
-                  </div>
-                  <div class="stat_item">
-                    <p class="stat_name">사회공헌 참여 사무소</p>
-                    <div class="num_box">
-                      <span class="count" data-count="942">0</span>
-                      <em class="unit">개</em>
-                    </div>
-                  </div>
-                  <div class="stat_item">
-                    <p class="stat_name">사회공헌 참여 인원</p>
-                    <div class="num_box">
-                      <span class="count" data-count="5419">0</span>
-                      <em class="unit">명</em>
-                    </div>
-                  </div>
-                  <div class="stat_item">
-                    <p class="stat_name">사회공헌 활동시간</p>
-                    <div class="num_box">
-                      <span class="count" data-count="19754">0</span>
-                      <em class="unit">시간</em>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card_container">
-                  <div class="card_item card01">
-                    <a href="#">
-                      <div class="thumb">
-                        <img src="images/nh_01.png" alt="비전 이미지" />
-                      </div>
-                      <div class="info_box">
-                        <div class="inner_txt">
-                          <h3>비전</h3>
-                          <p class="hidden_desc">
-                            농업이 대우받고 농촌이 희망이며<br />농업인이
-                            존경받는 함께하는 농협
-                          </p>
-                          <span class="btn_more">VIEW MORE +</span>
-                        </div>
-                      </div>
-                      <div class="draw_border"></div>
-                    </a>
-                  </div>
-                  <div class="card_item card02">
-                    <a href="#">
-                      <div class="thumb">
-                        <img src="images/nh_03.png" alt="PR 자료실 이미지" />
-                      </div>
-                      <div class="info_box">
-                        <div class="inner_txt">
-                          <h3>PR 자료실</h3>
-                          <p class="hidden_desc">
-                            농협의 다양한 소식과<br />홍보자료를 한눈에
-                            확인하세요
-                          </p>
-                          <span class="btn_more">VIEW MORE +</span>
-                        </div>
-                      </div>
-                      <div class="draw_border"></div>
-                    </a>
-                  </div>
-                  <div class="card_item card03">
-                    <a href="#">
-                      <div class="thumb">
-                        <img src="images/nh_05.png" alt="경영성과 이미지" />
-                      </div>
-                      <div class="info_box">
-                        <div class="inner_txt">
-                          <h3>경영성과</h3>
-                          <p class="hidden_desc">
-                            투명한 경영을 통해<br />신뢰받는 농협을 만들어갑니다
-                          </p>
-                          <span class="btn_more">VIEW MORE +</span>
-                        </div>
-                      </div>
-                      <div class="draw_border"></div>
-                    </a>
-                  </div>
-                </div>
-              </div>
+            <div class="video-progress-wrap">
+              <div class="video-progress-bar"></div>
             </div>
-
-            <div class="section section03" data-anchor="news"></div>
-            <div class="section section04" data-anchor="about"></div>
-            <div class="section section05" data-anchor="footer"></div>
+            <div class="main-quick-menu">
+              <ul class="quick-list">
+                <li>
+                  <a href="#information"><span>01</span>농협소개</a>
+                </li>
+                <li>
+                  <a href="#news"><span>02</span>NH소식</a>
+                </li>
+                <li>
+                  <a href="#about"><span>03</span>지속가능경영</a>
+                </li>
+                <li>
+                  <a href="#footer"><span>04</span>인재채용</a>
+                </li>
+              </ul>
+            </div>
           </div>
+          <div class="section section02" id="information">
+            <div class="inner">
+              <div class="info-container">
+                <div class="info-wrap">
+                  <div class="info-intro">
+                    <div class="vision-badge">VISION 2030</div>
+                    <h2>
+                      변화와 혁신을 통한<br /><span>새로운 대한민국 농협</span>
+                    </h2>
+                    <div class="slogan-wrap">
+                      <p>희망농업, 행복농촌 농협이 만들어 갑니다</p>
+                    </div>
+                  </div>
+                  <div class="info-values">
+                    <div class="value-item">
+                      <div class="value-icon">01</div>
+                      <h3>국민에게 사랑받는 농협</h3>
+                    </div>
+                    <div class="value-item">
+                      <div class="value-icon">02</div>
+                      <h3>농업인을 위한 농협</h3>
+                    </div>
+                    <div class="value-item">
+                      <div class="value-icon">03</div>
+                      <h3>지역 농축협과 함께하는 농협</h3>
+                    </div>
+                    <div class="value-item">
+                      <div class="value-icon">04</div>
+                      <h3>경쟁력 있는 글로벌 농협</h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="info-history-horizontal">
+                  <div class="history-wrapper">
+                    <div class="history-title">
+                      <h2>沿革畵報</h2>
+                      <p>한국농협, 60년의 순간들</p>
+                    </div>
+                    <div class="history-track">
+                      <div class="history-item first-item">
+                        <div class="history-img"></div>
+                        <div class="history-text">
+                          <h3>1961</h3>
+                          <p>종합농협의 탄생</p>
+                          <p class="history-detail">
+                            농업은행·농협 통합 및 농협중앙회 출범
+                          </p>
+                        </div>
+                      </div>
+                      <div class="history-item">
+                        <div class="history-img"></div>
+                        <div class="history-text">
+                          <h3>1970</h3>
+                          <p>조합 사업기능 확충</p>
+                          <p class="history-detail">
+                            연쇄점·상호금융·공제 등으로 사업영역 확대
+                          </p>
+                        </div>
+                      </div>
+                      <div class="history-item">
+                        <div class="history-img"></div>
+                        <div class="history-text">
+                          <h3>1988</h3>
+                          <p>민주농협 출범과 새농협 운동</p>
+                          <p class="history-detail">
+                            조합장·중앙회장 직선제 도입, 농협 경영의 자율화 대폭
+                            확대
+                          </p>
+                        </div>
+                      </div>
+                      <div class="history-item">
+                        <div class="history-img"></div>
+                        <div class="history-text">
+                          <h3>2000</h3>
+                          <p>통합농협의 출범</p>
+                          <p class="history-detail">
+                            농·축·인삼협 통합 농협중앙회 출범
+                          </p>
+                        </div>
+                      </div>
+                      <div class="history-item">
+                        <div class="history-img"></div>
+                        <div class="history-text">
+                          <h3>2012</h3>
+                          <p>사업구조 개편</p>
+                          <p class="history-detail">
+                            1중앙회-2지주회사의 ‘새농협’ 체제 구축
+                          </p>
+                        </div>
+                      </div>
+                      <div class="history-item last-item">
+                        <div class="history-img"></div>
+                        <div class="history-text">
+                          <h3>2026</h3>
+                          <p>디지털 농협으로의 전환</p>
+                          <p class="history-detail">
+                            AI·빅데이터 기반 스마트 농협 구현
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="history-zoom-bg"></div>
+                  <div class="history-zoom-content">
+                    <h2>
+                      농협은 <span class="count-num">65</span>년을 넘어,<br />
+                      당신의 내일로
+                    </h2>
+                    <p>
+                      농협은 언제나 당신 곁에 있습니다. 농업인과 지역사회와 함께
+                      성장하며, 신뢰와 지속가능성을 바탕으로 미래를 선도하는
+                      농협이 되겠습니다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section section03" id="news"></div>
+          <div class="section section04" id="about"></div>
+          <div class="section section05" id="footer"></div>
         </div>
       </section>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollToPlugin.min.js"></script>
+    <script src="index.js" defer></script>
   </body>
 </html>
