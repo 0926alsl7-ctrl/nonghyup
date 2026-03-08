@@ -156,10 +156,30 @@ $(document).ready(function () {
 
   historyTL.addLabel("zoomStart");
 
-  // 줌 연출 및 섹션 3 등장
+  // 줌 연출 및 섹션 3 등장 (이 부분만 이렇게 덮어써!)
   historyTL
     .to([track, ".history-title"], { opacity: 0, duration: 0.5 }, "+=0.2")
-    .to(zoomBg, { autoAlpha: 1, scale: 1, duration: 1 }, "-=0.3")
+    .to(
+      zoomBg,
+      {
+        autoAlpha: 1,
+        scale: 1,
+        duration: 1,
+        // [추가] 줌 배경이 나타나기 시작할 때 안개도 같이 등장!
+        onStart: () => {
+          document
+            .querySelector(".info-history-horizontal")
+            .classList.add("show-fog");
+        },
+        // [추가] 뒤로 스크롤해서 돌아갈 때는 안개 제거!
+        onReverseComplete: () => {
+          document
+            .querySelector(".info-history-horizontal")
+            .classList.remove("show-fog");
+        },
+      },
+      "-=0.3",
+    )
     .to(
       zoomContent,
       {
@@ -179,5 +199,6 @@ $(document).ready(function () {
       },
       "-=0.5",
     )
-    .addLabel("section3Enter").to(".section03", { marginTop: 0, duration: 1.5, ease: "power2.inOut" }); // 섹션 3 밀어올리기
+    .addLabel("section3Enter")
+    .to(".section03", { marginTop: 0, duration: 1.5, ease: "power2.inOut" });
 });
