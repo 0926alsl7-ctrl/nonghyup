@@ -1,6 +1,25 @@
 $(document).ready(function () {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
+  // [기존 그대로] 스와이퍼 초기 설정
+  const newsSwiper = new Swiper(".news-swiper", {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    loop: true,
+    observer: true,
+    observeParents: true,
+    watchOverflow: true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      320: { slidesPerView: 1.1, spaceBetween: 15 },
+      1024: { slidesPerView: 3, spaceBetween: 30 },
+    },
+  });
+
+  // [기존 그대로] 헤더 호버
   $("#header").on("mouseenter", function () {
     if ($(window).width() > 1024) $(this).addClass("open");
   });
@@ -8,6 +27,7 @@ $(document).ready(function () {
     if ($(window).width() > 1024) $(this).removeClass("open");
   });
 
+  // [기존 그대로] 모바일 메뉴
   $(".all_menu a").on("click", function (e) {
     e.preventDefault();
     $(".header_wrap").addClass("m_open");
@@ -39,6 +59,7 @@ $(document).ready(function () {
       }
     });
 
+  // [기존 그대로] 퀵메뉴 스크롤
   $(".quick-list li a").on("click", function (e) {
     e.preventDefault();
     const target = $(this).attr("href");
@@ -49,6 +70,7 @@ $(document).ready(function () {
     });
   });
 
+  // [기존 그대로] 비디오 컨트롤
   const video = document.getElementById("intro_video");
   const progressBar = $(".video-progress-bar");
   const videoBtn = $(".video-ctrl-btn");
@@ -56,11 +78,11 @@ $(document).ready(function () {
   videoBtn.on("click", function () {
     if (video.paused) {
       video.play();
-      video.muted = false; // 음소거 해제
-      $(this).removeClass("play"); // 아이콘 변경
+      video.muted = false;
+      $(this).removeClass("play");
     } else {
       video.pause();
-      $(this).addClass("play"); // 아이콘 변경
+      $(this).addClass("play");
     }
   });
 
@@ -71,6 +93,7 @@ $(document).ready(function () {
     });
   }
 
+  // [기존 그대로] 카운팅 애니메이션
   gsap.from(".info-intro .count-num", {
     innerText: 0,
     duration: 2,
@@ -81,6 +104,7 @@ $(document).ready(function () {
     },
   });
 
+  // [기존 그대로] 섹션 01 풀페이지 자석
   ScrollTrigger.create({
     trigger: ".section01",
     start: "top top",
@@ -94,6 +118,7 @@ $(document).ready(function () {
     },
   });
 
+  // [기존 그대로] 헤더 다크모드 전환
   ScrollTrigger.create({
     trigger: ".section02",
     start: "top 80px",
@@ -104,7 +129,7 @@ $(document).ready(function () {
     onLeaveBack: () => $("#header").removeClass("dark"),
   });
 
-  // --- [2. 가로 스크롤 + 줌 애니메이션 통합] ---
+  // --- [가로 스크롤 타임라인 시작] ---
   const track = document.querySelector(".history-track");
   const items = gsap.utils.toArray(".history-item");
   const zoomBg = document.querySelector(".history-zoom-bg");
@@ -115,12 +140,11 @@ $(document).ready(function () {
       trigger: ".info-history-horizontal",
       start: "top top",
       end: "+=8000",
-      scrub: 1, // 쫀득함 유지
+      scrub: 1,
       pin: true,
       anticipatePin: 1,
-      // snap 설정을 밖으로 빼서 'labels' 방식으로 변경
       snap: {
-        snapTo: "labels", // 레이블이 있는 곳에만 딱딱 멈춤!
+        snapTo: "labels",
         duration: 0.3,
         delay: 0,
         ease: "power1.inOut",
@@ -128,13 +152,9 @@ $(document).ready(function () {
     },
   });
 
-  // 2. 가로 이동 단계마다 레이블 추가 (이래야 지 혼자 끝까지 안 감)
-  // 총 이동 거리를 아이템 개수로 나눠서 단계별로 label을 심어줌
   items.forEach((item, i) => {
-    historyTL.addLabel("step" + i); // 멈춰야 할 포인트 레이블 생성
-
+    historyTL.addLabel("step" + i);
     if (i < items.length - 1) {
-      // 다음 아이템으로 가는 애니메이션
       historyTL.to(track, {
         x: () =>
           -(
@@ -142,9 +162,8 @@ $(document).ready(function () {
             (i + 1)
           ),
         ease: "none",
-        duration: 1, // 단계별 가중치
+        duration: 1,
         onUpdate: function () {
-          // 현재 진행도에 따른 active 클래스 처리
           items.forEach((el, idx) => {
             if (idx === i) el.classList.add("active");
             else el.classList.remove("active");
@@ -156,7 +175,6 @@ $(document).ready(function () {
 
   historyTL.addLabel("zoomStart");
 
-  // 줌 연출 및 섹션 3 등장 (이 부분만 이렇게 덮어써!)
   historyTL
     .to([track, ".history-title"], { opacity: 0, duration: 0.5 }, "+=0.2")
     .to(
@@ -165,13 +183,11 @@ $(document).ready(function () {
         autoAlpha: 1,
         scale: 1,
         duration: 1,
-        // [추가] 줌 배경이 나타나기 시작할 때 안개도 같이 등장!
         onStart: () => {
           document
             .querySelector(".info-history-horizontal")
             .classList.add("show-fog");
         },
-        // [추가] 뒤로 스크롤해서 돌아갈 때는 안개 제거!
         onReverseComplete: () => {
           document
             .querySelector(".info-history-horizontal")
@@ -186,7 +202,6 @@ $(document).ready(function () {
         autoAlpha: 1,
         duration: 1,
         onStart: () => {
-          // 65년 카운팅
           const count65 = document.querySelector(
             ".history-zoom-content .count-num",
           );
@@ -200,21 +215,51 @@ $(document).ready(function () {
       "-=0.5",
     )
     .addLabel("section3Enter")
-    .to(".section03", { marginTop: -1, duration: 1.5, ease: "power2.inOut" });
-});
-const newsSwiper = new Swiper(".news-swiper", {
-  slidesPerView: 3, // 한 번에 3개 보여주기
-  spaceBetween: 30, // 카드 사이 간격
-  loop: true,
-  autoplay: { delay: 4000, disableOnInteraction: false },
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-  // 모바일 대응까지 미리 넣어줌!
-  breakpoints: {
-    320: { slidesPerView: 1.2, spaceBetween: 15 }, // 모바일은 1개+살짝 걸치게
-    768: { slidesPerView: 2.2, spaceBetween: 20 }, // 태블릿은 2개+걸치게
-    1024: { slidesPerView: 3, spaceBetween: 30 }, // 데스크탑은 깔끔하게 3개
-  },
+    // ★ 여기가 핵심! 섹션 3가 올라온 직후 스와이퍼를 깨워줘야 함
+    .to(".section03", {
+      marginTop: -1,
+      duration: 1.5,
+      ease: "power2.inOut",
+      onComplete: () => {
+        newsSwiper.update(); // 스와이퍼한테 "이제 니 자리야, 계산해!"라고 명령
+      },
+    });
+
+  // [기존 그대로] 섹션 03 자석 효과
+  ScrollTrigger.create({
+    trigger: ".section03",
+    start: "top 20%",
+    onEnter: () => {
+      gsap.to(window, {
+        scrollTo: { y: ".section03", autoKill: false },
+        duration: 1,
+        ease: "power2.inOut",
+      });
+    },
+  });
+
+  // [수정] 뉴스 카드 등장 애니메이션 (스와이퍼가 준비된 후에 보이게 트리거 시점 조정)
+  gsap.from(".news-card-item", {
+    scrollTrigger: {
+      trigger: ".section03", // news-swiper 대신 섹션 자체를 트리거로
+      start: "top 30%",
+    },
+    y: 60,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: "power3.out",
+  });
+
+  // [기존 그대로] 하단 그리드 애니메이션
+  gsap.from(".sub-box", {
+    scrollTrigger: {
+      trigger: ".news-sub-grid",
+      start: "top 85%",
+    },
+    x: (i) => (i === 0 ? -50 : 50),
+    opacity: 0,
+    duration: 1,
+    ease: "power2.out",
+  });
 });
