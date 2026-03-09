@@ -200,5 +200,21 @@ $(document).ready(function () {
       "-=0.5",
     )
     .addLabel("section3Enter")
-    .to(".section03", { marginTop: 0, duration: 1.5, ease: "power2.inOut" });
+    .to(".section03", { marginTop: -1, duration: 1.5, ease: "power2.inOut" });
+});
+const newsSwiper = new Swiper(".news-swiper", {
+  slidesPerView: 3, // 한 번에 3개 보여주기
+  spaceBetween: 30, // 카드 사이 간격
+  loop: true,
+  autoplay: { delay: 4000, disableOnInteraction: false },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  // 모바일 대응까지 미리 넣어줌!
+  breakpoints: {
+    320: { slidesPerView: 1.2, spaceBetween: 15 }, // 모바일은 1개+살짝 걸치게
+    768: { slidesPerView: 2.2, spaceBetween: 20 }, // 태블릿은 2개+걸치게
+    1024: { slidesPerView: 3, spaceBetween: 30 }, // 데스크탑은 깔끔하게 3개
+  },
 });
