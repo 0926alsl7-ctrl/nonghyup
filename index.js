@@ -1,25 +1,32 @@
 $(document).ready(function () {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-  // [기존 그대로] 스와이퍼 초기 설정
-  const newsSwiper = new Swiper(".news-swiper", {
-    slidesPerView: 3,
-    spaceBetween: 30,
-    loop: true,
-    observer: true,
-    observeParents: true,
-    watchOverflow: true,
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    breakpoints: {
-      320: { slidesPerView: 1.1, spaceBetween: 15 },
-      1024: { slidesPerView: 3, spaceBetween: 30 },
-    },
-  });
+  let newsSwiper = null;
 
-  // [기존 그대로] 헤더 호버
+  function initNewsSwiper() {
+    if (newsSwiper !== null) return;
+
+    newsSwiper = new Swiper(".news-swiper", {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      loop: true,
+      observer: true,
+      observeParents: true,
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        320: { slidesPerView: 1.1, spaceBetween: 15 },
+        1024: { slidesPerView: 3, spaceBetween: 30 },
+      },
+    });
+  }
+
   $("#header").on("mouseenter", function () {
     if ($(window).width() > 1024) $(this).addClass("open");
   });
@@ -27,7 +34,6 @@ $(document).ready(function () {
     if ($(window).width() > 1024) $(this).removeClass("open");
   });
 
-  // [기존 그대로] 모바일 메뉴
   $(".all_menu a").on("click", function (e) {
     e.preventDefault();
     $(".header_wrap").addClass("m_open");
@@ -59,18 +65,15 @@ $(document).ready(function () {
       }
     });
 
-  // [기존 그대로] 퀵메뉴 스크롤
   $(".quick-list li a").on("click", function (e) {
     e.preventDefault();
-    const target = $(this).attr("href");
     gsap.to(window, {
-      scrollTo: { y: target, autoKill: false },
+      scrollTo: { y: $(this).attr("href"), autoKill: false },
       duration: 1,
       ease: "power2.inOut",
     });
   });
 
-  // [기존 그대로] 비디오 컨트롤
   const video = document.getElementById("intro_video");
   const progressBar = $(".video-progress-bar");
   const videoBtn = $(".video-ctrl-btn");
@@ -93,7 +96,7 @@ $(document).ready(function () {
     });
   }
 
-  // [기존 그대로] 카운팅 애니메이션
+  // section02 카운팅 / 자석
   gsap.from(".info-intro .count-num", {
     innerText: 0,
     duration: 2,
@@ -104,7 +107,6 @@ $(document).ready(function () {
     },
   });
 
-  // [기존 그대로] 섹션 01 풀페이지 자석
   ScrollTrigger.create({
     trigger: ".section01",
     start: "top top",
@@ -173,56 +175,43 @@ $(document).ready(function () {
     }
   });
 
-  historyTL.addLabel("zoomStart");
-
   historyTL
+    .addLabel("zoomStart")
     .to([track, ".history-title"], { opacity: 0, duration: 0.5 }, "+=0.2")
     .to(
-      zoomBg,
+      ".history-zoom-bg",
       {
         autoAlpha: 1,
         scale: 1,
         duration: 1,
-        onStart: () => {
-          document
-            .querySelector(".info-history-horizontal")
-            .classList.add("show-fog");
-        },
-        onReverseComplete: () => {
-          document
-            .querySelector(".info-history-horizontal")
-            .classList.remove("show-fog");
-        },
+        onStart: () => $(".info-history-horizontal").addClass("show-fog"),
+        onReverseComplete: () =>
+          $(".info-history-horizontal").removeClass("show-fog"),
       },
       "-=0.3",
     )
     .to(
-      zoomContent,
+      ".history-zoom-content",
       {
         autoAlpha: 1,
         duration: 1,
-        onStart: () => {
-          const count65 = document.querySelector(
-            ".history-zoom-content .count-num",
-          );
+        onStart: () =>
           gsap.fromTo(
-            count65,
+            ".history-zoom-content .count-num",
             { innerText: 0 },
             { innerText: 65, duration: 1.5, snap: { innerText: 1 } },
-          );
-        },
+          ),
       },
       "-=0.5",
     )
     .addLabel("section3Enter")
-    // ★ 여기가 핵심! 섹션 3가 올라온 직후 스와이퍼를 깨워줘야 함
     .to(".section03", {
       marginTop: -1,
       duration: 1.5,
       ease: "power2.inOut",
       onComplete: () => {
-        newsSwiper.update(); // 스와이퍼한테 "이제 니 자리야, 계산해!"라고 명령
-      },
+        initNewsSwiper();
+      }, // 섹션이 완전히 올라오면 스와이퍼 시작
     });
 
   // [기존 그대로] 섹션 03 자석 효과
@@ -238,28 +227,44 @@ $(document).ready(function () {
     },
   });
 
-  // [수정] 뉴스 카드 등장 애니메이션 (스와이퍼가 준비된 후에 보이게 트리거 시점 조정)
-  gsap.from(".news-card-item", {
+  const newsTL = gsap.timeline({
     scrollTrigger: {
-      trigger: ".section03", // news-swiper 대신 섹션 자체를 트리거로
-      start: "top 30%",
+      trigger: ".section03",
+      start: "top 40%", // 섹션이 보이기 시작하면
     },
-    y: 60,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.2,
-    ease: "power3.out",
   });
 
-  // [기존 그대로] 하단 그리드 애니메이션
-  gsap.from(".sub-box", {
+  newsTL
+    .from(".news-visual-wrap", {
+      y: 100,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+      onStart: () => {
+        initNewsSwiper();
+      }, // 나타나기 시작할 때 스와이퍼도 깨움
+    })
+    .from(
+      ".sub-box",
+      {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.3, // 공지사항 나오고 0.3초 뒤 입찰공고 등장
+        ease: "power2.out",
+      },
+      "-=0.5",
+    ); // 스와이퍼 등장 끝나기 0.5초 전부터 시작 (자연스럽게 연결)
+
+  // 섹션 4 배경색 전환 트리거
+  gsap.to("body", {
     scrollTrigger: {
-      trigger: ".news-sub-grid",
-      start: "top 85%",
+      trigger: ".section04", // 섹션 4가 시작될 때
+      start: "top 80%", // 화면 아래쪽 80% 지점에 섹션 4가 걸리면
+      end: "top 50%", // 50% 지점까지 오면서 서서히 바뀜
+      scrub: true, // 스크롤 속도에 맞춰서 색 변화
     },
-    x: (i) => (i === 0 ? -50 : 50),
-    opacity: 0,
-    duration: 1,
-    ease: "power2.out",
+    backgroundColor: "#ffffff", // 배경색을 흰색으로!
+    ease: "none",
   });
 });

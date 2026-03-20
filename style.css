@@ -689,7 +689,7 @@ header.open .depth2_wrap {
 }
 .history-title {
   position: absolute;
-  top: 120px;
+  top: 160px;
   left: 10vw;
   z-index: 10;
   border-left: 5px solid #1e4d2b;
@@ -697,7 +697,7 @@ header.open .depth2_wrap {
 }
 
 .history-title h2 {
-  font-size: 36px;
+  font-size: 52px;
   font-family: sans-serif;
   color: #1e4d2b;
   letter-spacing: 2px;
@@ -917,7 +917,7 @@ header.open .depth2_wrap {
   text-align: left;
 } /* 상단 슬라이드 영역 */
 .news-visual-wrap {
-  margin-bottom: 30px;
+  margin-bottom: 14px;
 }
 .news-section-top {
   display: flex;
@@ -1016,7 +1016,7 @@ header.open .depth2_wrap {
 .sub-box {
   background: rgba(255, 255, 255, 0.03);
   border-radius: 20px;
-  padding: 30px;
+  padding: 20px;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 .sub-header {
@@ -1026,7 +1026,10 @@ header.open .depth2_wrap {
   margin-bottom: 20px;
   color: #fff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 14px;
+  padding: 0 0 20px 14px;
+}
+.sub-header h4 {
+  font-size: 20px;
 }
 .sub-list li a {
   display: flex;
@@ -1040,10 +1043,10 @@ header.open .depth2_wrap {
   text-decoration: none;
   padding: 12px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
 }
-.sub-list li a:hover {
-  border-radius: 2px;
+.sub-box:hover {
+  transform: translateY(-10px) !important;
   background: rgba(255, 255, 255, 0.1);
 }
 .sub-list li p {
@@ -1107,3 +1110,118 @@ header.open .depth2_wrap {
 }
 
 /* ********section04 *************** */
+/* style.css에 추가 */
+
+.section04 {
+  background-color: #ffffff; /* 흰색 배경 */
+  padding: 140px 0; /* 위아래 여백을 더 넓게 줘서 시원하게 */
+  color: #222;
+}
+
+/* 1. 헤더 스타일 (더 심플하게) */
+.about-header {
+  text-align: center;
+  margin-bottom: 90px;
+}
+.about-title {
+  font-size: 42px; /* 제목 더 크게 */
+  font-weight: 800;
+  color: #00833e; /* 농협 그린 */
+  margin-bottom: 15px;
+}
+.about-desc {
+  font-size: 20px; /* 설명 더 크게 */
+  color: #555;
+  font-weight: 500;
+}
+
+/* 2. 와이드 배너형 스타일 */
+.about-value-wide {
+  width: 100%;
+}
+.value-banner {
+  width: 100%;
+  height: 400px; /* 배너 높이 */
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.value-banner + .value-banner {
+  margin-top: -1px;
+} /* 배너 사이 경계선 삭제 */
+
+.banner-img-wrap {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.banner-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+} /* 이미지 투명도 조절 */
+
+/* 배경색 지정 */
+.env {
+  background-color: #e6f7ff;
+} /* 연한 파랑 */
+.soc {
+  background-color: #f6ffed;
+} /* 연한 초록 */
+.gov {
+  background-color: #f0f5ff;
+} /* 연한 네이비 */
+
+.banner-txt-wrap {
+  position: relative;
+  z-index: 2;
+  text-align: center; /* 텍스트 중앙 정렬 */
+  width: 100%;
+}
+.value-tag {
+  display: block;
+  font-size: 80px; /* 큼직한 알파벳 */
+  font-weight: 900;
+  color: rgba(0, 131, 62, 0.1); /* 농협 그린 투명하게 */
+  margin-bottom: -15px;
+  font-family: "Poppins", sans-serif; /* 영문 폰트 스타일 */
+}
+.env .value-tag {
+  color: rgba(24, 144, 255, 0.1);
+} /* 파랑 투명하게 */
+.soc .value-tag {
+  color: rgba(82, 196, 26, 0.1);
+} /* 초록 투명하게 */
+.gov .value-tag {
+  color: rgba(47, 84, 235, 0.1);
+} /* 네이비 투명하게 */
+
+.banner-txt-wrap h4 {
+  font-size: 30px; /* 텍스트 크기 키움 */
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: #111;
+}
+.banner-txt-wrap p {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* 3. 반응형 (모바일 대응) */
+@media screen and (max-width: 1024px) {
+  .section04 {
+    padding: 90px 0;
+  }
+  .value-banner {
+    height: 300px;
+  }
+  .value-tag {
+    font-size: 60px;
+  }
+}
