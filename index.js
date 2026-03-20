@@ -65,15 +65,6 @@ $(document).ready(function () {
       }
     });
 
-  $(".quick-list li a").on("click", function (e) {
-    e.preventDefault();
-    gsap.to(window, {
-      scrollTo: { y: $(this).attr("href"), autoKill: false },
-      duration: 1,
-      ease: "power2.inOut",
-    });
-  });
-
   const video = document.getElementById("intro_video");
   const progressBar = $(".video-progress-bar");
   const videoBtn = $(".video-ctrl-btn");
@@ -257,14 +248,29 @@ $(document).ready(function () {
     ); // 스와이퍼 등장 끝나기 0.5초 전부터 시작 (자연스럽게 연결)
 
   // 섹션 4 배경색 전환 트리거
-  gsap.to("body", {
+  gsap.to(".section03", {
     scrollTrigger: {
       trigger: ".section04", // 섹션 4가 시작될 때
       start: "top 80%", // 화면 아래쪽 80% 지점에 섹션 4가 걸리면
       end: "top 50%", // 50% 지점까지 오면서 서서히 바뀜
       scrub: true, // 스크롤 속도에 맞춰서 색 변화
     },
-    backgroundColor: "#ffffff", // 배경색을 흰색으로!
+    opacity:"0.4",
+    backgroundColor: "#fff", // 배경색을 흰색으로!
     ease: "none",
+  });
+
+  $(".value-banner.split").each(function (i, el) {
+    gsap.to(el, {
+      scrollTrigger: {
+        trigger: el,
+        start: "top 85%", // 화면 85% 지점에 오면 등장
+        toggleActions: "play none none none",
+      },
+      opacity: 1,
+      x: 0,
+      duration: 1.2,
+      ease: "power3.out",
+    });
   });
 });

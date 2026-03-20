@@ -57,6 +57,7 @@ a {
 .section {
   width: 100%;
   height: 100vh;
+  min-height: 100vh;
   position: relative;
   overflow: hidden;
 }
@@ -452,64 +453,7 @@ header.open .depth2_wrap {
 .video-progress-bar {
   width: 0%;
   height: 100%;
-  background: #ffd900; /* 농협 포인트 컬러 */
-}
-
-.main-quick-menu {
-  position: absolute;
-  bottom: 91px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  width: 90%;
-}
-.quick-list {
-  display: flex;
-}
-.quick-list li {
-  flex: 1;
-}
-.quick-list li a {
-  position: relative;
-  display: block;
-  padding: 24px 14px;
-  border-radius: 2px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 16px;
-  font-weight: 500;
-  transition: 0.3s ease;
-}
-/* 없앨까고민 ---- 
-.quick-list li a::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 4px; 
-  background: #fff;
-  transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
-}
-.quick-list li a:hover::after {
-  width: 100%;
-}
-*/
-.quick-list li a:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
-  letter-spacing: 0.5px;
-}
-.quick-list li a span {
-  color: rgba(255, 255, 255, 0.4);
-  transition: 0.3s;
-  font-size: 12px;
-  margin-right: 10px;
-  opacity: 0.6;
-  font-family: "Arial";
-}
-.quick-list li a:hover span {
-  color: #fff;
-  opacity: 1;
+  background: #ffd900;
 }
 /* section01 mobile ***************** */
 @media screen and (max-width: 1024px) {
@@ -908,14 +852,13 @@ header.open .depth2_wrap {
 .section03 .inner {
   padding: 0 120px;
 }
-
 .news-title {
   font-size: 36px;
   font-weight: 800;
   color: #f9d400;
   letter-spacing: 2px;
   text-align: left;
-} /* 상단 슬라이드 영역 */
+}
 .news-visual-wrap {
   margin-bottom: 14px;
 }
@@ -930,11 +873,9 @@ header.open .depth2_wrap {
   font-size: 24px;
   font-weight: 700;
 }
-
-/* 뉴스 카드 슬라이드 스타일 */
 .news-swiper {
   padding: 10px 0 40px;
-} /* 그림자 안 잘리게 패딩 */
+}
 .news-card-item {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
@@ -947,7 +888,6 @@ header.open .depth2_wrap {
   transform: translateY(-10px);
   background: rgba(255, 255, 255, 0.1);
 }
-
 .card-img {
   width: 100%;
   height: 320px;
@@ -984,7 +924,7 @@ header.open .depth2_wrap {
 .swiper-container .swiper-button-prev {
   color: #fff;
   top: 50%;
-  transform: translateY(-120%); /* 중앙 정렬 */
+  transform: translateY(-120%);
   width: 50px;
   height: 50px;
   background: rgba(255, 255, 255, 0.05);
@@ -1007,7 +947,6 @@ header.open .depth2_wrap {
   background: #f9d400;
   color: #000;
 }
-/* 하단 2열 그리드 */
 .news-sub-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1054,16 +993,16 @@ header.open .depth2_wrap {
   width: 0;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis; /* 긴 글씨 쩜쩜쩜 처리 */
+  text-overflow: ellipsis;
   color: #ddd;
 }
 .sub-list li span {
   font-size: 13px;
   color: #666;
-  flex-shrink: 0; /* 날짜는 안 찌그러지게 */
+  flex-shrink: 0;
 }
 .btn-view-all {
-  width: 40px; /* 너무 길지 않게 적당히 */
+  width: 40px;
   height: 40px;
   position: relative;
   display: flex;
@@ -1081,7 +1020,7 @@ header.open .depth2_wrap {
   transform: translateY(-50%);
   left: 11px;
   width: 16px;
-  height: 2px; /* 선 두께 두껍게 */
+  height: 2px;
   background: rgba(255, 255, 255, 0.8);
   transition: 0.3s;
 }
@@ -1110,118 +1049,98 @@ header.open .depth2_wrap {
 }
 
 /* ********section04 *************** */
-/* style.css에 추가 */
-
 .section04 {
-  background-color: #ffffff; /* 흰색 배경 */
-  padding: 140px 0; /* 위아래 여백을 더 넓게 줘서 시원하게 */
-  color: #222;
+  min-height: 100vh;
+  height: auto !important;
+  background-color: #fff;
+  padding: 80px 0;
 }
 
-/* 1. 헤더 스타일 (더 심플하게) */
-.about-header {
-  text-align: center;
-  margin-bottom: 90px;
-}
-.about-title {
-  font-size: 42px; /* 제목 더 크게 */
-  font-weight: 800;
-  color: #00833e; /* 농협 그린 */
-  margin-bottom: 15px;
-}
-.about-desc {
-  font-size: 20px; /* 설명 더 크게 */
-  color: #555;
-  font-weight: 500;
-}
-
-/* 2. 와이드 배너형 스타일 */
 .about-value-wide {
   width: 100%;
+  max-width: 1100px; /* 너무 꽉 안 채우고 딱 적당히 */
+  margin: 0 auto;
 }
-.value-banner {
-  width: 100%;
-  height: 400px; /* 배너 높이 */
-  position: relative;
-  overflow: hidden;
+.value-banner.split {
   display: flex;
   align-items: center;
-}
-.value-banner + .value-banner {
-  margin-top: -1px;
-} /* 배너 사이 경계선 삭제 */
-
-.banner-img-wrap {
+  justify-content: space-between; /* 사진과 텍스트 사이 간격 */
   width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
+  height: 240px; /* 누나가 원한 슬림한 높이 */
+  margin-bottom: 80px; /* 배너 사이 시원한 여백 */
+  opacity: 0; /* JS 등장용 */
+  border-radius: 8px;
 }
-.banner-img-wrap img {
+/* 왼쪽에서 등장할 놈들 초기 위치 */
+.value-banner.split:not(.reverse) {
+  transform: translateX(-100px);
+}
+/* 오른쪽에서 등장할 놈들 초기 위치 */
+.value-banner.split.reverse {
+  flex-direction: row-reverse;
+  transform: translateX(100px);
+}
+.banner-img-box {
+  width: 45%;
+  height: 100%;
+  position: relative;
+}
+
+.banner-img-box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.3;
-} /* 이미지 투명도 조절 */
-
-/* 배경색 지정 */
-.env {
-  background-color: #e6f7ff;
-} /* 연한 파랑 */
-.soc {
-  background-color: #f6ffed;
-} /* 연한 초록 */
-.gov {
-  background-color: #f0f5ff;
-} /* 연한 네이비 */
-
-.banner-txt-wrap {
-  position: relative;
-  z-index: 2;
-  text-align: center; /* 텍스트 중앙 정렬 */
-  width: 100%;
+  z-index: 1;
 }
-.value-tag {
-  display: block;
-  font-size: 80px; /* 큼직한 알파벳 */
-  font-weight: 900;
-  color: rgba(0, 131, 62, 0.1); /* 농협 그린 투명하게 */
-  margin-bottom: -15px;
-  font-family: "Poppins", sans-serif; /* 영문 폰트 스타일 */
-}
-.env .value-tag {
-  color: rgba(24, 144, 255, 0.1);
-} /* 파랑 투명하게 */
-.soc .value-tag {
-  color: rgba(82, 196, 26, 0.1);
-} /* 초록 투명하게 */
-.gov .value-tag {
-  color: rgba(47, 84, 235, 0.1);
-} /* 네이비 투명하게 */
 
-.banner-txt-wrap h4 {
-  font-size: 30px; /* 텍스트 크기 키움 */
-  font-weight: 800;
+/* 2. 텍스트 박스: 사진 위에 겹치기 (오버랩) */
+.banner-txt-box {
+  width: 55%;
+  height: auto;
+  position: static; /* 사진 위로 안 올라감 */
+}
+
+.txt-inner span {
+  display: inline-block; /* 배경색 줄 거니까 inline-block으로 */
+  font-size: 13px;
+  font-weight: 700;
+  color: #00833e;
+  background: rgba(0, 131, 62, 0.05); /* 아주 연한 그린 배경 */
+  padding: 4px 10px;
+  border-radius: 4px;
   margin-bottom: 12px;
-  color: #111;
-}
-.banner-txt-wrap p {
-  font-size: 18px;
-  color: #333;
-  line-height: 1.5;
+  letter-spacing: 1px;
 }
 
-/* 3. 반응형 (모바일 대응) */
+.txt-inner h4 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 15px;
+}
+.txt-inner p {
+  font-size: 18px;
+  color: #444;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
 @media screen and (max-width: 1024px) {
-  .section04 {
-    padding: 90px 0;
+  .value-banner.split,
+  .value-banner.reverse {
+    flex-direction: column;
+    height: auto;
+    transform: none !important;
+    opacity: 1 !important;
   }
-  .value-banner {
-    height: 300px;
+  .banner-img-box,
+  .banner-txt-box {
+    width: 100%;
   }
-  .value-tag {
-    font-size: 60px;
+  .banner-txt-box {
+    margin-top: 20px;
+    text-align: center;
   }
 }
+/* section05 */
+/* ======= footer =======  */
