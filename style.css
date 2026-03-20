@@ -1064,12 +1064,12 @@ header.open .depth2_wrap {
 .value-banner.split {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* 사진과 텍스트 사이 간격 */
   width: 100%;
   height: 240px; /* 누나가 원한 슬림한 높이 */
   margin-bottom: 80px; /* 배너 사이 시원한 여백 */
   opacity: 0; /* JS 등장용 */
   border-radius: 8px;
+  position: relative;
 }
 /* 왼쪽에서 등장할 놈들 초기 위치 */
 .value-banner.split:not(.reverse) {
@@ -1080,24 +1080,42 @@ header.open .depth2_wrap {
   flex-direction: row-reverse;
   transform: translateX(100px);
 }
+.value-banner.reverse .banner-txt-box {
+  left: 0; /* 텍스트가 왼쪽으로 */
+  right: auto;
+  text-align: right; /* [누나 요청] 텍스트 오른쪽 정렬 */
+}
+.value-banner.reverse .txt-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* 오른쪽 정렬을 위한 Flex 설정 */
+}
 .banner-img-box {
-  width: 45%;
+  width: 60%;
   height: 100%;
   position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .banner-img-box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 1;
+  object-position: end;
 }
 
 /* 2. 텍스트 박스: 사진 위에 겹치기 (오버랩) */
 .banner-txt-box {
-  width: 55%;
+  width: 40%;
   height: auto;
-  position: static; /* 사진 위로 안 올라감 */
+  position: absolute; /* 사진 위로 띄우기 */
+  right: 0; /* 사진이 왼쪽일 때 기본 오른쪽 배치 */
+  background: #ffffff; /* 하얀색 텍스트 카드 */
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* 은은한 그림자 */
+  z-index: 2;
 }
 
 .txt-inner span {
@@ -1113,7 +1131,7 @@ header.open .depth2_wrap {
 }
 
 .txt-inner h4 {
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 800;
   color: #111;
   margin-bottom: 15px;
