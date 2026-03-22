@@ -1,32 +1,52 @@
 $(document).ready(function () {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-  let newsSwiper = null;
+  ScrollTrigger.create({
+    start: "top top",
+    end: 99999,
+    onUpdate: (self) => {
+      const currentScroll = self.scroll();
+      const section02Top = $(".section02").offset().top - 10;
+      const historyTop = $(".info-history-horizontal").offset().top;
+      const section03Top = $(".section03").offset().top - 10;
+      const section04Top = $(".section04").offset().top - 10;
 
-  function initNewsSwiper() {
-    if (newsSwiper !== null) return;
+      const isZoomArea =
+        currentScroll > historyTop + 4500 && currentScroll < section03Top;
 
-    newsSwiper = new Swiper(".news-swiper", {
-      slidesPerView: 3,
-      spaceBetween: 30,
-      loop: true,
-      observer: true,
-      observeParents: true,
-      autoplay: {
-        delay: 6000,
-        disableOnInteraction: false,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      breakpoints: {
-        320: { slidesPerView: 1.1, spaceBetween: 15 },
-        1024: { slidesPerView: 3, spaceBetween: 30 },
-      },
-    });
-  }
+      if (currentScroll > section02Top) {
+        if (self.direction === 1 || isZoomArea) {
+          gsap.to("#header", {
+            yPercent: -100,
+            duration: 0.1,
+            ease: "power1.out",
+          });
+        } else {
+          gsap.to("#header", {
+            yPercent: 0,
+            duration: 0.1,
+            ease: "power1.out",
+          });
 
+          if (currentScroll < section03Top) {
+            $("#header").addClass("dark");
+          } else if (
+            currentScroll >= section03Top &&
+            currentScroll < section04Top
+          ) {
+            $("#header").removeClass("dark");
+          } else if (currentScroll >= section04Top) {
+            $("#header").addClass("dark");
+          }
+        }
+      } else {
+        gsap.to("#header", { yPercent: 0, duration: 0.1, ease: "power1.out" });
+        $("#header").removeClass("dark");
+      }
+    },
+  });
+
+  // 공통 ui
   $("#header").on("mouseenter", function () {
     if ($(window).width() > 1024) $(this).addClass("open");
   });
@@ -65,39 +85,30 @@ $(document).ready(function () {
       }
     });
 
+  // section01 - video ============
   const video = document.getElementById("intro_video");
   const progressBar = $(".video-progress-bar");
   const videoBtn = $(".video-ctrl-btn");
 
-  videoBtn.on("click", function () {
-    if (video.paused) {
-      video.play();
-      video.muted = false;
-      $(this).removeClass("play");
-    } else {
-      video.pause();
-      $(this).addClass("play");
-    }
-  });
-
   if (video) {
+    videoBtn.on("click", function () {
+      if (video.paused) {
+        video.play();
+        video.muted = false;
+        $(this).removeClass("play");
+      } else {
+        video.pause();
+        $(this).addClass("play");
+      }
+    });
+
     video.addEventListener("timeupdate", function () {
       const percentage = (video.currentTime / video.duration) * 100;
       progressBar.css("width", percentage + "%");
     });
   }
 
-  // section02 카운팅 / 자석
-  gsap.from(".info-intro .count-num", {
-    innerText: 0,
-    duration: 2,
-    snap: { innerText: 1 },
-    scrollTrigger: {
-      trigger: ".info-intro",
-      start: "top 80%",
-    },
-  });
-
+  // section01 -> section02
   ScrollTrigger.create({
     trigger: ".section01",
     start: "top top",
@@ -111,18 +122,7 @@ $(document).ready(function () {
     },
   });
 
-  // [기존 그대로] 헤더 다크모드 전환
-  ScrollTrigger.create({
-    trigger: ".section02",
-    start: "top 80px",
-    end: "bottom 80px",
-    onEnter: () => $("#header").addClass("dark"),
-    onLeave: () => $("#header").removeClass("dark"),
-    onEnterBack: () => $("#header").addClass("dark"),
-    onLeaveBack: () => $("#header").removeClass("dark"),
-  });
-
-  // --- [가로 스크롤 타임라인 시작] ---
+  // section02 - history
   const track = document.querySelector(".history-track");
   const items = gsap.utils.toArray(".history-item");
   const zoomBg = document.querySelector(".history-zoom-bg");
@@ -132,38 +132,23 @@ $(document).ready(function () {
     scrollTrigger: {
       trigger: ".info-history-horizontal",
       start: "top top",
-      end: "+=8000",
+      end: "+=6000",
       scrub: 1,
       pin: true,
       anticipatePin: 1,
-      snap: {
-        snapTo: "labels",
-        duration: 0.3,
-        delay: 0,
-        ease: "power1.inOut",
-      },
     },
   });
 
   items.forEach((item, i) => {
-    historyTL.addLabel("step" + i);
-    if (i < items.length - 1) {
-      historyTL.to(track, {
-        x: () =>
-          -(
-            ((track.scrollWidth - window.innerWidth) / (items.length - 1)) *
-            (i + 1)
-          ),
-        ease: "none",
-        duration: 1,
-        onUpdate: function () {
-          items.forEach((el, idx) => {
-            if (idx === i) el.classList.add("active");
-            else el.classList.remove("active");
-          });
-        },
-      });
-    }
+    historyTL.to(track, {
+      x: () =>
+        -(((track.scrollWidth - window.innerWidth) / (items.length - 1)) * i),
+      duration: 1,
+      ease: "none",
+      onUpdate: () => {
+        items.forEach((el, idx) => el.classList.toggle("active", idx === i));
+      },
+    });
   });
 
   historyTL
@@ -175,6 +160,7 @@ $(document).ready(function () {
         autoAlpha: 1,
         scale: 1,
         duration: 1,
+        // [누나 요청 반영] 원래 코드 그대로!
         onStart: () => $(".info-history-horizontal").addClass("show-fog"),
         onReverseComplete: () =>
           $(".info-history-horizontal").removeClass("show-fog"),
@@ -202,75 +188,88 @@ $(document).ready(function () {
       ease: "power2.inOut",
       onComplete: () => {
         initNewsSwiper();
-      }, // 섹션이 완전히 올라오면 스와이퍼 시작
+      },
     });
 
-  // [기존 그대로] 섹션 03 자석 효과
-  ScrollTrigger.create({
-    trigger: ".section03",
-    start: "top 20%",
-    onEnter: () => {
-      gsap.to(window, {
-        scrollTo: { y: ".section03", autoKill: false },
-        duration: 1,
-        ease: "power2.inOut",
-      });
-    },
-  });
+  // swiper
+  let newsSwiper = null;
+
+  function initNewsSwiper() {
+    if (newsSwiper !== null) return;
+    newsSwiper = new Swiper(".news-swiper", {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      loop: true,
+      observer: true,
+      observeParents: true,
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        320: { slidesPerView: 1.1, spaceBetween: 15 },
+        1024: { slidesPerView: 3, spaceBetween: 30 },
+      },
+    });
+  }
 
   const newsTL = gsap.timeline({
     scrollTrigger: {
       trigger: ".section03",
-      start: "top 40%", // 섹션이 보이기 시작하면
+      start: "top 20%", // 조금 더 일찍 시작해서 여유있게
+      toggleActions: "play none none none",
     },
   });
 
   newsTL
     .from(".news-visual-wrap", {
-      y: 100,
+      y: 50,
       opacity: 0,
-      duration: 1,
+      duration: 1.5,
       ease: "power3.out",
-      onStart: () => {
-        initNewsSwiper();
-      }, // 나타나기 시작할 때 스와이퍼도 깨움
+      onStart: () => initNewsSwiper(),
     })
     .from(
       ".sub-box",
-      {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.3, // 공지사항 나오고 0.3초 뒤 입찰공고 등장
-        ease: "power2.out",
-      },
-      "-=0.5",
-    ); // 스와이퍼 등장 끝나기 0.5초 전부터 시작 (자연스럽게 연결)
+      { y: 30, opacity: 0, duration: 1.2, stagger: 0.4, ease: "power2.out" },
+      "-=1",
+    );
 
-  // 섹션 4 배경색 전환 트리거
-  gsap.to(".section03", {
-    scrollTrigger: {
-      trigger: ".section04", // 섹션 4가 시작될 때
-      start: "top 80%", // 화면 아래쪽 80% 지점에 섹션 4가 걸리면
-      end: "top 50%", // 50% 지점까지 오면서 서서히 바뀜
-      scrub: true, // 스크롤 속도에 맞춰서 색 변화
+  ScrollTrigger.create({
+    trigger: ".section04",
+    start: "top 95%", // 섹션 4가 살짝 보일 때
+    onEnter: () => {
+      // 1. 섹션 3 배경색을 흰색으로 부드럽게 (빨리 안바뀌게 duration 조절)
+      gsap.to(".section03", {
+        backgroundColor: "#ffffff",
+        duration: 1.5,
+        ease: "power2.inOut",
+      });
+
+      // 2. 풀페이지처럼 섹션 4로 강제 스크롤
+      gsap.to(window, {
+        scrollTo: ".section04",
+        duration: 1.2,
+        ease: "power2.inOut",
+      });
+
+      // 3. 섹션 4 배너들 순차 등장
+      $(".value-banner.split").each(function (i, el) {
+        gsap.to(el, {
+          opacity: 1,
+          x: 0,
+          duration: 1.5,
+          delay: 0.5 + i * 0.3,
+          ease: "power3.out",
+        });
+      });
     },
-    opacity:"0.4",
-    backgroundColor: "#fff", // 배경색을 흰색으로!
-    ease: "none",
-  });
-
-  $(".value-banner.split").each(function (i, el) {
-    gsap.to(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: "top 85%", // 화면 85% 지점에 오면 등장
-        toggleActions: "play none none none",
-      },
-      opacity: 1,
-      x: 0,
-      duration: 1.2,
-      ease: "power3.out",
-    });
+    onLeaveBack: () => {
+      gsap.to(".section03", { backgroundColor: "#0a0c28", duration: 1 });
+    },
   });
 });
