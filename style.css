@@ -1215,3 +1215,144 @@ header.open .depth2_wrap {
 }
 /* section05 */
 /* ======= footer =======  */
+
+#footer {
+  background-color:rgb(51, 51, 51) !important;/* 농협 푸터 특유의 짙은 회색 */
+  color: #999;
+  padding: 40px 0 60px;
+  font-size: 14px;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 상단 라인 */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #444;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap; /* 모바일 대응 */
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links li a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.footer-links li a.highlight {
+  color: #f9d400; /* 개인정보처리방침 강조색 */
+  font-weight: 700;
+}
+
+/* SNS 아이콘 스타일 */
+.footer-sns {
+  display: flex;
+  gap: 10px;
+  margin-left: auto; /* 왼쪽 메뉴와 패밀리사이트 사이로 밀기 */
+  margin-right: 20px;
+}
+
+.sns-icon {
+  width: 32px;
+  height: 32px;
+  background: #444;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.sns-icon:hover {
+  background: #00833e; /* 농협 그린으로 포인트 */
+}
+
+.footer-family button {
+  background: none;
+  border: 1px solid #666;
+  color: #ccc;
+  padding: 8px 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 하단 정보 영역 */
+.footer-bottom {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.footer-logo img {
+  width: 120px;
+  filter: brightness(0) invert(1); /* 로고를 흰색으로 반전 */
+}
+
+.footer-info address {
+  font-style: normal;
+  line-height: 1.8;
+  margin-bottom: 10px;
+}
+
+.copyright {
+  font-size: 13px;
+  color: #666;
+}
+
+.footer-cert img {
+  width: 60px;
+  margin-left: auto;
+}
+
+/* ★ 모바일 대응 (반응형) */
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 10px 15px;
+  }
+
+  .footer-sns {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .footer-family {
+    width: 100%;
+  }
+
+  .footer-family button {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-cert {
+    margin-left: 0;
+  }
+}
