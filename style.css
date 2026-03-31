@@ -620,9 +620,9 @@ header.open .depth2_wrap {
 
 /* section02 ------ History */
 .info-history-horizontal {
-  margin-left: calc(-50vw + 50%);
   width: 100vw;
   position: relative;
+  overflow: hidden;
 }
 
 .info-history-horizontal::after {
@@ -652,37 +652,40 @@ header.open .depth2_wrap {
   position: relative;
   width: 100%;
   height: 100vh !important;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 .history-title {
   position: absolute;
   top: 90px;
-  left: 3vw;
+  left: 5%;
   z-index: 10;
   border-left: 4px solid #1e4d2b;
   padding-left: 16px;
 }
-.big-year-display {
-  font-size: 48px;
-  font-weight: 900;
+.history-title h3 {
+  font-size: 32px;
+  font-weight: 700;
   color: #1e4d2b;
+  letter-spacing: -0.05em;
 }
 .history-title p {
   font-size: 16px;
   color: #666;
   margin-top: 4px;
+  padding-left: 4px;
 }
 .history-fixed-visual {
   position: absolute;
-  top: 50%;
-  right: 10%;
-  transform: translateY(-50%);
-  width: 45vw;
+  right: 5%;
+  width: 540px; /* 고정값 사용 (모바일은 media query로 조절 가능) */
   height: 50vh;
   z-index: 2;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 12px; /* 좀 더 트렌디하게 */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
+
 .visual-container {
   width: 100%;
   height: 100%;
@@ -690,63 +693,46 @@ header.open .depth2_wrap {
 }
 .visual-item {
   position: absolute;
-  top: 0;
+  top: 100%; /* 아래 대기 */
   left: 0;
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transform: translateY(100px); /* 시작 위치 */
-  transition: all 1.2s cubic-bezier(0.33, 1, 0.68, 1); /* 스르륵 느낌의 핵심 */
+  transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
 }
-
 .visual-item.active {
+  top: 0;
   opacity: 1;
-  transform: translateY(0);
 }
-
 .history-track-wrap {
-  position: absolute;
-  top: 50%;
-  left: 0;
   width: 100%;
-  transform: translateY(-50%);
-  z-index: 3;
+  padding-left: 10%;
 }
 .history-track {
   display: flex;
-  padding-left: 10vw;
-  gap: 70vw;
+  gap: 300px;
 }
 .history-item {
+  flex-shrink: 0;
   width: 400px;
-  opacity: 0.1;
-  transform: translateY(30px);
-  transition: all 0.8s ease;
+  opacity: 0.2;
+  transition: opacity 0.5s;
+  padding: 14px;
 }
 .history-item.active {
   opacity: 1;
-  transform: translateY(0);
 }
 
-.history-text {
-  padding-left: 26px;
-}
-.history-text h3 {
+.history-text .item-year {
   font-size: 54px;
   font-weight: 900;
-  color: #00833e;
-  margin-bottom: 10px;
-}
-.history-text .split-year {
-  display: block;
-  font-size: 50px;
-  font-weight: 800;
   color: #1e4d2b;
   margin-bottom: 20px;
-  font-family: "Oswald", sans-serif;
+  line-height: 1;
 }
+
 .history-text .h-tit {
   font-size: 24px;
   font-weight: 700;
@@ -779,6 +765,23 @@ header.open .depth2_wrap {
 }
 
 /* history zoom */
+.history-flower-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(255, 255, 255, 0.1) 100%
+    ),
+    url("/images/flower2.jpg") no-repeat center bottom / cover;
+  opacity: 0.4; /* 은은하게 */
+  z-index: -1;
+  pointer-events: none;
+}
 .history-zoom-bg {
   background: url(/images/visual-03.png) center/cover no-repeat;
   position: fixed;

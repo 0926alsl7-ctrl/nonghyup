@@ -123,67 +123,51 @@ $(document).ready(function () {
   });
 
   // section02 - history
-  const track = document.querySelector(".history-track");
   const items = gsap.utils.toArray(".history-item");
   const visuals = gsap.utils.toArray(".visual-item");
+  const track = document.querySelector(".history-track");
   const zoomBg = document.querySelector(".history-zoom-bg");
   const zoomContent = document.querySelector(".history-zoom-content");
 
-  function animateYear($el, targetYear) {
-    const currentYear = parseInt($el.text());
-    if (currentYear === targetYear) return;
-
-    gsap.to(
-      { val: currentYear },
-      {
-        val: targetYear,
-        duration: 0.8,
-        ease: "power2.out",
-        onUpdate: function () {
-          $el.text(Math.floor(this.targets()[0].val));
-        },
-      },
-    );
-  }
   const historyTL = gsap.timeline({
     scrollTrigger: {
       trigger: ".info-history-horizontal",
       start: "top top",
-      end: "+=10000", // 더 길게 잡아서 스크롤 속도를 늦춤 (부드러움의 비결)
-      scrub: 1.5, // 0.8에서 1.5로 올림. 스크롤을 멈춰도 슬라이딩이 부드럽게 따라옴
+      end: "+=8000",
+      scrub: 1,
       pin: true,
     },
   });
 
   items.forEach((item, i) => {
-    // 1. 텍스트 카드가 왼쪽 15% 위치에 딱 멈추도록 이동
+    // 가로로 이동하는 애니메이션
     historyTL.to(
       track,
       {
-        x: () => -(item.offsetLeft - window.innerWidth * 0.15),
+        x: () => -(item.offsetLeft - window.innerWidth * 0.1),
         duration: 1,
-        ease: "power2.inOut",
-        onUpdate: () => {
-          // 2. 현재 활성화된 아이템 체크
-          const progress = historyTL.scrollTrigger.progress;
-          // 섹션별로 사진 활성화 클래스 조절
-          visuals.forEach((vs, idx) =>
-            vs.classList.toggle("active", idx === i),
-          );
-          items.forEach((it, idx) => it.classList.toggle("active", idx === i));
-
-          // 상단 타이틀 년도도 부드럽게 업데이트
-          const currentYear = items[i].getAttribute("data-year");
-          animateYear($(".big-year-display"), currentYear);
+        ease: "none",
+        onUpdate: function () {
+          // 진행도에 따라 active 클래스 교체 (사진/설명 동시 활성화)
+          const progress = this.progress();
+          if (progress > 0.5) {
+            visuals.forEach((v, idx) =>
+              v.classList.toggle("active", idx === i),
+            );
+            items.forEach((it, idx) =>
+              it.classList.toggle("active", idx === i),
+            );
+          }
         },
       },
-      i === 0 ? 0 : "-=0.5",
-    ); // 타임라인을 살짝 겹쳐서 블럭 느낌 제거
+      i === 0 ? 0 : ">",
+    );
   });
 
   historyTL
+    .to(".history-wrapper", { autoAlpha: 0, duration: 0.5 }) // 연혁 내용 페이드아웃
     .addLabel("zoomStart")
-    .to([track, ".history-title"], { autoAlpha: 0, duration: 0.5 }, "+=0.2")
+    .to([track, ".history-title"], { opacity: 0, duration: 0.5 }, "+=0.2")
     .to(
       ".history-zoom-bg",
       {
@@ -225,7 +209,7 @@ $(document).ready(function () {
         initNewsSwiper();
       },
     });
-
+    
   // swiper
   let newsSwiper = null;
 
