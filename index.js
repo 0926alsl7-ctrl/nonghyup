@@ -125,41 +125,71 @@ $(document).ready(function () {
   // section02 - history
   const track = document.querySelector(".history-track");
   const items = gsap.utils.toArray(".history-item");
+  const visuals = gsap.utils.toArray(".visual-item");
   const zoomBg = document.querySelector(".history-zoom-bg");
   const zoomContent = document.querySelector(".history-zoom-content");
 
+  function animateYear($el, targetYear) {
+    const currentYear = parseInt($el.text());
+    if (currentYear === targetYear) return;
+
+    gsap.to(
+      { val: currentYear },
+      {
+        val: targetYear,
+        duration: 0.8,
+        ease: "power2.out",
+        onUpdate: function () {
+          $el.text(Math.floor(this.targets()[0].val));
+        },
+      },
+    );
+  }
   const historyTL = gsap.timeline({
     scrollTrigger: {
       trigger: ".info-history-horizontal",
       start: "top top",
-      end: "+=6000",
-      scrub: 1,
+      end: "+=10000", // 더 길게 잡아서 스크롤 속도를 늦춤 (부드러움의 비결)
+      scrub: 1.5, // 0.8에서 1.5로 올림. 스크롤을 멈춰도 슬라이딩이 부드럽게 따라옴
       pin: true,
-      anticipatePin: 1,
     },
   });
 
   items.forEach((item, i) => {
-    historyTL.to(track, {
-      x: () =>
-        -(((track.scrollWidth - window.innerWidth) / (items.length - 1)) * i),
-      duration: 1,
-      ease: "none",
-      onUpdate: () => {
-        items.forEach((el, idx) => el.classList.toggle("active", idx === i));
+    // 1. 텍스트 카드가 왼쪽 15% 위치에 딱 멈추도록 이동
+    historyTL.to(
+      track,
+      {
+        x: () => -(item.offsetLeft - window.innerWidth * 0.15),
+        duration: 1,
+        ease: "power2.inOut",
+        onUpdate: () => {
+          // 2. 현재 활성화된 아이템 체크
+          const progress = historyTL.scrollTrigger.progress;
+          // 섹션별로 사진 활성화 클래스 조절
+          visuals.forEach((vs, idx) =>
+            vs.classList.toggle("active", idx === i),
+          );
+          items.forEach((it, idx) => it.classList.toggle("active", idx === i));
+
+          // 상단 타이틀 년도도 부드럽게 업데이트
+          const currentYear = items[i].getAttribute("data-year");
+          animateYear($(".big-year-display"), currentYear);
+        },
       },
-    });
+      i === 0 ? 0 : "-=0.5",
+    ); // 타임라인을 살짝 겹쳐서 블럭 느낌 제거
   });
 
   historyTL
     .addLabel("zoomStart")
-    .to([track, ".history-title"], { opacity: 0, duration: 0.5 }, "+=0.2")
+    .to([track, ".history-title"], { autoAlpha: 0, duration: 0.5 }, "+=0.2")
     .to(
       ".history-zoom-bg",
       {
         autoAlpha: 1,
         scale: 1,
-        duration: 1,
+        duration: 1.5,
         // [누나 요청 반영] 원래 코드 그대로!
         onStart: () => $(".info-history-horizontal").addClass("show-fog"),
         onReverseComplete: () =>
@@ -176,7 +206,12 @@ $(document).ready(function () {
           gsap.fromTo(
             ".history-zoom-content .count-num",
             { innerText: 0 },
-            { innerText: 65, duration: 1.5, snap: { innerText: 1 } },
+            {
+              innerText: 65,
+              duration: 1.4,
+              snap: { innerText: 1 },
+              ease: "power1.inOut",
+            },
           ),
       },
       "-=0.5",
@@ -241,30 +276,27 @@ $(document).ready(function () {
 
   ScrollTrigger.create({
     trigger: ".section04",
-    start: "top 95%", // 섹션 4가 살짝 보일 때
+    start: "top 98%",
     onEnter: () => {
-      // 1. 섹션 3 배경색을 흰색으로 부드럽게 (빨리 안바뀌게 duration 조절)
       gsap.to(".section03", {
-        backgroundColor: "#ffffff",
+        opacity: "0",
         duration: 1.5,
         ease: "power2.inOut",
       });
 
-      // 2. 풀페이지처럼 섹션 4로 강제 스크롤
-      gsap.to(window, {
-        scrollTo: ".section04",
-        duration: 1.2,
-        ease: "power2.inOut",
-      });
+      // gsap.to(window, {
+      //   scrollTo: ".section04",
+      //   duration: 1.2,
+      //   ease: "power2.inOut",
+      // });
 
-      // 3. 섹션 4 배너들 순차 등장
       $(".value-banner.split").each(function (i, el) {
         gsap.to(el, {
           opacity: 1,
           x: 0,
-          duration: 1.5,
-          delay: 0.5 + i * 0.3,
-          ease: "power3.out",
+          duration: 1.8,
+          delay: 0.3 + i * 0.4,
+          ease: "power4.out",
         });
       });
     },

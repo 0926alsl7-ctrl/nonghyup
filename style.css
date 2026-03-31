@@ -618,29 +618,11 @@ header.open .depth2_wrap {
   transform: translateY(0);
 }
 
-/* History */
+/* section02 ------ History */
 .info-history-horizontal {
   margin-left: calc(-50vw + 50%);
   width: 100vw;
   position: relative;
-}
-
-.history-flower-bg {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.5) 0%,
-      rgba(255, 255, 255, 0.1) 100%
-    ),
-    url("/images/history_bg.png") no-repeat center bottom / cover;
-  opacity: 0.4; /* 은은하게 */
-  z-index: -1;
-  pointer-events: none;
 }
 
 .info-history-horizontal::after {
@@ -680,69 +662,96 @@ header.open .depth2_wrap {
   border-left: 4px solid #1e4d2b;
   padding-left: 16px;
 }
-
-.history-title h2 {
-  font-size: 36px;
-  font-family: sans-serif;
+.big-year-display {
+  font-size: 48px;
+  font-weight: 900;
   color: #1e4d2b;
-  letter-spacing: 2px;
 }
 .history-title p {
   font-size: 16px;
   color: #666;
   margin-top: 4px;
 }
-.history-track {
-  display: flex;
-  width: max-content;
-  height: 100%;
-  align-items: center;
-  padding: 0 200px;
-  padding-top: 120px;
-}
-.history-item {
-  flex-shrink: 0;
-  width: 520px;
-  padding-bottom: 40px;
-  border-radius: 6px;
+.history-fixed-visual {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translateY(-50%);
+  width: 45vw;
+  height: 50vh;
+  z-index: 2;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(8px);
-  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.05);
-  opacity: 0.2 !important;
-  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 4px;
 }
-.history-item:nth-child(2n) {
-  transform: translateY(-60px) scale(0.7);
-}
-.history-item:nth-child(2n + 1) {
-  transform: translateY(60px) scale(0.7);
-}
-.history-item.active {
-  transform: translateY(0) scale(1) !important;
-  opacity: 1 !important;
-  z-index: 100;
-}
-
-.history-img {
+.visual-container {
   width: 100%;
-  height: 280px;
+  height: 100%;
+  position: relative;
+}
+.visual-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
-  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(100px); /* 시작 위치 */
+  transition: all 1.2s cubic-bezier(0.33, 1, 0.68, 1); /* 스르륵 느낌의 핵심 */
 }
+
+.visual-item.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.history-track-wrap {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  z-index: 3;
+}
+.history-track {
+  display: flex;
+  padding-left: 10vw;
+  gap: 70vw;
+}
+.history-item {
+  width: 400px;
+  opacity: 0.1;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+.history-item.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .history-text {
   padding-left: 26px;
 }
 .history-text h3 {
-  font-size: 36px;
-  color: #1e4d2b;
+  font-size: 54px;
+  font-weight: 900;
+  color: #00833e;
+  margin-bottom: 10px;
 }
-
-.history-text p {
-  font-size: 18px;
-  margin-top: 14px;
-  color: #555;
+.history-text .split-year {
+  display: block;
+  font-size: 50px;
+  font-weight: 800;
+  color: #1e4d2b;
+  margin-bottom: 20px;
+  font-family: "Oswald", sans-serif;
+}
+.history-text .h-tit {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111;
+  word-break: keep-all;
 }
 .history-detail {
   margin-top: 8px !important;
@@ -750,22 +759,22 @@ header.open .depth2_wrap {
   color: #888 !important;
 }
 
-.history-item:nth-child(1) .history-img {
+.history-fixed-visual .visual-item:nth-child(1) {
   background-image: url("images/1961-1.png");
 }
-.history-item:nth-child(2) .history-img {
+.history-fixed-visual .visual-item:nth-child(2) {
   background-image: url("images/1970-1.png");
 }
-.history-item:nth-child(3) .history-img {
+.history-fixed-visual .visual-item:nth-child(3) {
   background-image: url("images/1988-1.png");
 }
-.history-item:nth-child(4) .history-img {
+.history-fixed-visual .visual-item:nth-child(4) {
   background-image: url("images/2000-1.png");
 }
-.history-item:nth-child(5) .history-img {
+.history-fixed-visual .visual-item:nth-child(5) {
   background-image: url("images/2012.png");
 }
-.history-item:nth-child(6) .history-img {
+.history-fixed-visual .visual-item:nth-child(6) {
   background-image: url("images/visual-02.png");
 }
 
@@ -798,12 +807,12 @@ header.open .depth2_wrap {
   opacity: 0;
 }
 .history-zoom-content h2 {
-  font-size: 42px;
+  font-size: 44px;
   font-weight: 900;
   line-height: 1.2;
 }
 .history-zoom-content p {
-  font-size: 24px;
+  font-size: 22px;
   margin-top: 32px;
   color: #cbcbcb;
 }
@@ -1105,122 +1114,188 @@ header.open .depth2_wrap {
 .section04 {
   min-height: 100vh;
   height: auto !important;
-  background-color: #fff;
-  padding: 80px 0;
+  background-color: #fcfcfc;
+  padding: 100px 0;
 }
 
 .about-value-wide {
   width: 100%;
-  max-width: 1100px; /* 너무 꽉 안 채우고 딱 적당히 */
+  max-width: 1300px;
   margin: 0 auto;
-}
-.value-banner.split {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 240px; /* 누나가 원한 슬림한 높이 */
-  margin-bottom: 80px; /* 배너 사이 시원한 여백 */
-  opacity: 0; /* JS 등장용 */
-  border-radius: 8px;
-  position: relative;
-}
-/* 왼쪽에서 등장할 놈들 초기 위치 */
-.value-banner.split:not(.reverse) {
-  transform: translateX(-100px);
-}
-/* 오른쪽에서 등장할 놈들 초기 위치 */
-.value-banner.split.reverse {
-  flex-direction: row-reverse;
-  transform: translateX(100px);
-}
-.value-banner.reverse .banner-txt-box {
-  left: 0; /* 텍스트가 왼쪽으로 */
-  right: auto;
-  text-align: right; /* [누나 요청] 텍스트 오른쪽 정렬 */
-}
-.value-banner.reverse .txt-inner {
+  padding: 0 30px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* 오른쪽 정렬을 위한 Flex 설정 */
 }
+
+.value-banner.split {
+  display: flex;
+  width: 840px;
+  height: 220px;
+  margin-bottom: 80px;
+  background: #fff;
+  opacity: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 16px 46px rgba(0, 0, 0, 0.06);
+  transition: transform 0.4s ease;
+}
+.value-banner.split:nth-child(1) {
+  align-self: flex-start;
+}
+.value-banner.split:nth-child(2) {
+  align-self: flex-end;
+}
+.value-banner.split:nth-child(3) {
+  align-self: flex-start;
+}
+.value-banner.split:hover {
+  transform: translateY(-6px);
+}
+
+.value-banner.split:not(.reverse) {
+  transform: translateX(-120px);
+}
+
+.value-banner.split.reverse {
+  flex-direction: row-reverse;
+  transform: translateX(120px);
+}
+
+/* ==================== 이미지 박스 ==================== */
 .banner-img-box {
-  width: 60%;
+  width: 52%;
   height: 100%;
   position: relative;
   overflow: hidden;
-  z-index: 1;
 }
 
 .banner-img-box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: end;
+  object-position: center;
+  transition: transform 0.7s ease;
 }
 
-/* 2. 텍스트 박스: 사진 위에 겹치기 (오버랩) */
+.value-banner.split:hover .banner-img-box img {
+  transform: scale(1.04);
+}
+
+/* ==================== 텍스트 박스 ==================== */
 .banner-txt-box {
-  width: 40%;
-  height: auto;
-  position: absolute; /* 사진 위로 띄우기 */
-  right: 0; /* 사진이 왼쪽일 때 기본 오른쪽 배치 */
-  background: #ffffff; /* 하얀색 텍스트 카드 */
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* 은은한 그림자 */
+  width: 48%;
+  background: #ffffff;
+  padding: 60px 55px;
+  display: flex;
+  align-items: center;
+  position: relative;
   z-index: 2;
 }
 
-.txt-inner span {
-  display: inline-block; /* 배경색 줄 거니까 inline-block으로 */
-  font-size: 13px;
-  font-weight: 700;
-  color: #00833e;
-  background: rgba(0, 131, 62, 0.05); /* 아주 연한 그린 배경 */
-  padding: 4px 10px;
-  border-radius: 4px;
-  margin-bottom: 12px;
-  letter-spacing: 1px;
+.value-banner.reverse .banner-txt-box {
+  text-align: right;
+  justify-content: right;
 }
 
 .txt-inner h4 {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 800;
-  color: #111;
-  margin-bottom: 15px;
+  line-height: 1.15;
+  color: #0f172a;
+  margin-bottom: 22px;
+  letter-spacing: -0.03em;
 }
+
 .txt-inner p {
-  font-size: 18px;
-  color: #444;
+  font-size: 16px;
   line-height: 1.6;
+  color: #475569;
   word-break: keep-all;
 }
 
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+.badge.env {
+  background: #e6f3ec;
+  color: #00833e;
+} /* 연한 배경에 진한 글씨가 더 세련됨 */
+.badge.soc {
+  background: #fff9e6;
+  color: #d4a017;
+}
+.badge.gov {
+  background: #e6eefc;
+  color: #0047bb;
+}
+
+/* ==================== 모바일 ==================== */
 @media screen and (max-width: 1024px) {
   .value-banner.split,
   .value-banner.reverse {
     flex-direction: column;
-    height: auto;
+    min-height: auto;
+    margin-bottom: 100px;
     transform: none !important;
     opacity: 1 !important;
   }
-  .banner-img-box,
+
+  .banner-img-box {
+    width: 100%;
+    height: 280px;
+  }
+
   .banner-txt-box {
     width: 100%;
-  }
-  .banner-txt-box {
-    margin-top: 20px;
+    padding: 50px 40px;
     text-align: center;
   }
+
+  .value-banner.reverse .txt-inner {
+    align-items: center;
+  }
 }
+
+@media screen and (max-width: 640px) {
+  .section04 {
+    padding: 90px 0 110px;
+  }
+
+  .banner-img-box {
+    height: 240px;
+  }
+
+  .banner-txt-box {
+    padding: 42px 28px;
+  }
+
+  .txt-inner h4 {
+    font-size: 28px;
+  }
+
+  .txt-inner p {
+    font-size: 17px;
+  }
+}
+
 /* section05 */
 /* ======= footer =======  */
 
 #footer {
-  background-color:rgb(51, 51, 51) !important;/* 농협 푸터 특유의 짙은 회색 */
+  background-color: rgb(51, 51, 51) !important; /* 농협 푸터 특유의 짙은 회색 */
   color: #999;
-  padding: 40px 0 60px;
+  padding: 40px 0 90px;
   font-size: 14px;
+  height: auto !important;
+  overflow-y: hidden;
+  min-height: auto !important;
 }
 
 .footer-inner {
@@ -1235,7 +1310,7 @@ header.open .depth2_wrap {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #444;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
   margin-bottom: 30px;
   flex-wrap: wrap; /* 모바일 대응 */
 }
@@ -1260,7 +1335,7 @@ header.open .depth2_wrap {
   display: flex;
   gap: 10px;
   margin-left: auto; /* 왼쪽 메뉴와 패밀리사이트 사이로 밀기 */
-  margin-right: 20px;
+  margin-right: 24px;
 }
 
 .sns-icon {
@@ -1277,19 +1352,15 @@ header.open .depth2_wrap {
   transition: background 0.3s;
 }
 
-.sns-icon:hover {
-  background: #00833e; /* 농협 그린으로 포인트 */
-}
-
 .footer-family button {
-  background: none;
+  background: url(images/icon_arrow_01.png) 94% 50% / 5.5% auto no-repeat;
+  width: 180px;
   border: 1px solid #666;
   color: #ccc;
-  padding: 8px 15px;
+  padding: 10px 14px 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
 /* 하단 정보 영역 */
@@ -1340,11 +1411,6 @@ header.open .depth2_wrap {
 
   .footer-family {
     width: 100%;
-  }
-
-  .footer-family button {
-    width: 100%;
-    justify-content: space-between;
   }
 
   .footer-bottom {
