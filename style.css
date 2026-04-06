@@ -485,6 +485,7 @@ header.open .depth2_wrap {
 }
 .info-wrap {
   position: relative;
+  padding-bottom: 80px;
 }
 
 .info-intro {
@@ -654,6 +655,17 @@ header.open .depth2_wrap {
   height: 100vh !important;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+}
+.history-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100vh;
+  background-color: #f3f3f3;
 }
 .history-title {
   position: absolute;
@@ -672,20 +684,19 @@ header.open .depth2_wrap {
 .history-title p {
   font-size: 16px;
   color: #666;
-  margin-top: 4px;
+  margin-top: 6px;
   padding-left: 4px;
 }
 .history-fixed-visual {
   position: absolute;
-  right: 5%;
-  width: 540px; /* 고정값 사용 (모바일은 media query로 조절 가능) */
+  right: 6%;
+  width: 540px;
   height: 50vh;
   z-index: 2;
   overflow: hidden;
-  border-radius: 12px; /* 좀 더 트렌디하게 */
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.14);
 }
-
 .visual-container {
   width: 100%;
   height: 100%;
@@ -693,7 +704,7 @@ header.open .depth2_wrap {
 }
 .visual-item {
   position: absolute;
-  top: 100%; /* 아래 대기 */
+  top: 100%;
   left: 0;
   width: 100%;
   height: 100%;
@@ -706,6 +717,7 @@ header.open .depth2_wrap {
   top: 0;
   opacity: 1;
 }
+/* history track  */
 .history-track-wrap {
   width: 100%;
   padding-left: 10%;
@@ -716,16 +728,17 @@ header.open .depth2_wrap {
 }
 .history-item {
   flex-shrink: 0;
-  width: 400px;
-  opacity: 0.2;
-  transition: opacity 0.5s;
-  padding: 14px;
+  width: 440px;
+  opacity: 0.1;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  text-align: center;
 }
 .history-item.active {
   opacity: 1;
 }
 
-.history-text .item-year {
+.history-text .big-year {
   font-size: 54px;
   font-weight: 900;
   color: #1e4d2b;
@@ -741,8 +754,8 @@ header.open .depth2_wrap {
 }
 .history-detail {
   margin-top: 8px !important;
-  font-size: 15px !important;
-  color: #888 !important;
+  font-size: 16px !important;
+  color: #ccc!important;
 }
 
 .history-fixed-visual .visual-item:nth-child(1) {
@@ -763,25 +776,49 @@ header.open .depth2_wrap {
 .history-fixed-visual .visual-item:nth-child(6) {
   background-image: url("images/visual-02.png");
 }
+/* history pagination */
+/* 페이지네이션 디자인 */
+.history-pagination {
+  position: absolute;
+  right: 5%;
+  bottom: 10%;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 15px;
+}
+
+.pg-num-wrap {
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+.curr-idx {
+  color: #1e4d2b;
+  font-size: 24px;
+}
+.total-idx {
+  color: #ccc;
+}
+
+.pg-bar-container {
+  width: 150px;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.pg-bar-active {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 16.66%; /* 100 / 총 개수 */
+  height: 100%;
+  background: #1e4d2b;
+  transition: width 0.5s ease;
+}
 
 /* history zoom */
-.history-flower-bg {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.5) 0%,
-      rgba(255, 255, 255, 0.1) 100%
-    ),
-    url("/images/flower2.jpg") no-repeat center bottom / cover;
-  opacity: 0.4; /* 은은하게 */
-  z-index: -1;
-  pointer-events: none;
-}
 .history-zoom-bg {
   background: url(/images/visual-03.png) center/cover no-repeat;
   position: fixed;
@@ -1164,7 +1201,6 @@ header.open .depth2_wrap {
   transform: translateX(120px);
 }
 
-/* ==================== 이미지 박스 ==================== */
 .banner-img-box {
   width: 52%;
   height: 100%;
@@ -1184,7 +1220,6 @@ header.open .depth2_wrap {
   transform: scale(1.04);
 }
 
-/* ==================== 텍스트 박스 ==================== */
 .banner-txt-box {
   width: 48%;
   background: #ffffff;
@@ -1229,7 +1264,7 @@ header.open .depth2_wrap {
 .badge.env {
   background: #e6f3ec;
   color: #00833e;
-} /* 연한 배경에 진한 글씨가 더 세련됨 */
+}
 .badge.soc {
   background: #fff9e6;
   color: #d4a017;
@@ -1290,7 +1325,6 @@ header.open .depth2_wrap {
 
 /* section05 */
 /* ======= footer =======  */
-
 #footer {
   background-color: rgb(51, 51, 51) !important; /* 농협 푸터 특유의 짙은 회색 */
   color: #999;

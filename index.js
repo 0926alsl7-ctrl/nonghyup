@@ -46,7 +46,7 @@ $(document).ready(function () {
     },
   });
 
-  // 공통 ui
+  // 공통 ui ============================
   $("#header").on("mouseenter", function () {
     if ($(window).width() > 1024) $(this).addClass("open");
   });
@@ -122,41 +122,89 @@ $(document).ready(function () {
     },
   });
 
-  // section02 - history
+  // section02 - history 핵심 로직
   const items = gsap.utils.toArray(".history-item");
   const visuals = gsap.utils.toArray(".visual-item");
   const track = document.querySelector(".history-track");
   const zoomBg = document.querySelector(".history-zoom-bg");
   const zoomContent = document.querySelector(".history-zoom-content");
+  const pgBar = document.querySelector(".pg-bar-active");
+  const currIdxTxt = document.querySelector(".curr-idx");
 
   const historyTL = gsap.timeline({
     scrollTrigger: {
       trigger: ".info-history-horizontal",
       start: "top top",
-      end: "+=8000",
+      end: "+=12000", // 줌과 섹션3 연결을 위해 길이를 넉넉히 확보
       scrub: 1,
       pin: true,
+      // [촥촥 넘어가는 스냅 설정]
+      snap: {
+        snapTo: 1 / (items.length - 1), // 아이템 개수에 맞춰 딱딱 끊기게
+        duration: 0.3,
+        delay: 0,
+        ease: "power1.inOut",
+      },
+      onUpdate: (self) => {
+        // [수정] 초기화 범위를 0.4(가로스크롤 중간) 아래로 확 낮췄어.
+        // 이렇게 해야 줌 섹션(0.8 이상)에서 화면이 안 꺼져!
+        if (self.progress < 0.4) {
+          document
+            .querySelector(".info-history-horizontal")
+            .classList.remove("show-fog");
+          gsap.set([zoomBg, zoomContent], { visibility: "hidden", opacity: 0 });
+        }
+
+        if (self.progress === 0) {
+          items.forEach((item) =>
+            item.querySelector(".big-year").classList.remove("counted"),
+          );
+        }
+      },
     },
   });
 
+  // 1. 연혁 가로 스크롤 (기능 유지 + 마지막 안착 수정)
   items.forEach((item, i) => {
-    // 가로로 이동하는 애니메이션
+    const targetYear = parseInt(item.querySelector(".big-year").innerText);
+    const moveX =
+      i === items.length - 1
+        ? -(item.offsetLeft - window.innerWidth * 0.05)
+        : -(item.offsetLeft - window.innerWidth * 0.1);
+
     historyTL.to(
       track,
       {
-        x: () => -(item.offsetLeft - window.innerWidth * 0.1),
+        x: moveX,
         duration: 1,
         ease: "none",
         onUpdate: function () {
-          // 진행도에 따라 active 클래스 교체 (사진/설명 동시 활성화)
-          const progress = this.progress();
-          if (progress > 0.5) {
+          const isCurrent = this.progress() > 0.5;
+          if (isCurrent) {
             visuals.forEach((v, idx) =>
               v.classList.toggle("active", idx === i),
             );
             items.forEach((it, idx) =>
               it.classList.toggle("active", idx === i),
             );
+
+            if (pgBar) pgBar.style.width = `${((i + 1) / items.length) * 100}%`;
+            if (currIdxTxt) currIdxTxt.innerText = `0${i + 1}`;
+
+            const yearEl = item.querySelector(".big-year");
+            if (!yearEl.classList.contains("counted")) {
+              yearEl.classList.add("counted");
+              gsap.fromTo(
+                yearEl,
+                { innerText: targetYear - 10 },
+                {
+                  innerText: targetYear,
+                  duration: 0.5,
+                  snap: { innerText: 1 },
+                  ease: "power2.out",
+                },
+              );
+            }
           }
         },
       },
@@ -164,52 +212,47 @@ $(document).ready(function () {
     );
   });
 
+  historyTL.to({}, { duration: 0.5 });
+
   historyTL
-    .to(".history-wrapper", { autoAlpha: 0, duration: 0.5 }) // 연혁 내용 페이드아웃
-    .addLabel("zoomStart")
-    .to([track, ".history-title"], { opacity: 0, duration: 0.5 }, "+=0.2")
+    .to(".history-wrapper", { autoAlpha: 0, duration: 0.5 })
+    .add(() => {
+      document
+        .querySelector(".info-history-horizontal")
+        .classList.add("show-fog");
+    })
+    .set([zoomBg, zoomContent], { visibility: "visible" })
+    .to(zoomBg, { opacity: 1, scale: 1, duration: 1.5, ease: "power2.inOut" })
     .to(
-      ".history-zoom-bg",
+      zoomContent,
       {
-        autoAlpha: 1,
-        scale: 1,
-        duration: 1.5,
-        // [누나 요청 반영] 원래 코드 그대로!
-        onStart: () => $(".info-history-horizontal").addClass("show-fog"),
-        onReverseComplete: () =>
-          $(".info-history-horizontal").removeClass("show-fog"),
-      },
-      "-=0.3",
-    )
-    .to(
-      ".history-zoom-content",
-      {
-        autoAlpha: 1,
+        opacity: 1,
         duration: 1,
-        onStart: () =>
-          gsap.fromTo(
-            ".history-zoom-content .count-num",
-            { innerText: 0 },
-            {
-              innerText: 65,
-              duration: 1.4,
-              snap: { innerText: 1 },
-              ease: "power1.inOut",
-            },
-          ),
+        onStart: () => {
+          const countNum = document.querySelector(".count-num");
+          if (countNum) {
+            gsap.fromTo(
+              countNum,
+              { innerText: 0 },
+              {
+                innerText: 65,
+                duration: 1.5,
+                snap: { innerText: 1 },
+                ease: "power2.out",
+              },
+            );
+          }
+        },
       },
       "-=0.5",
-    )
-    .addLabel("section3Enter")
-    .to(".section03", {
-      marginTop: -1,
-      duration: 1.5,
-      ease: "power2.inOut",
-      onComplete: () => {
-        initNewsSwiper();
-      },
-    });
-    
+    );
+
+  historyTL.to(".section03", {
+    marginTop: 0,
+    duration: 1.5,
+    ease: "power2.inOut",
+  });
+
   // swiper
   let newsSwiper = null;
 
@@ -285,7 +328,7 @@ $(document).ready(function () {
       });
     },
     onLeaveBack: () => {
-      gsap.to(".section03", { backgroundColor: "#0a0c28", duration: 1 });
+      gsap.to(".section03", { opacity: 1, duration: 1, ease: "power2.inOut" });
     },
   });
 });
