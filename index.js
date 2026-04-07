@@ -122,7 +122,7 @@ $(document).ready(function () {
     },
   });
 
-  // section02 - history 핵심 로직
+  // section02 - history 
   const items = gsap.utils.toArray(".history-item");
   const visuals = gsap.utils.toArray(".visual-item");
   const track = document.querySelector(".history-track");
@@ -135,19 +135,16 @@ $(document).ready(function () {
     scrollTrigger: {
       trigger: ".info-history-horizontal",
       start: "top top",
-      end: "+=12000", // 줌과 섹션3 연결을 위해 길이를 넉넉히 확보
+      end: "+=12000", 
       scrub: 1,
       pin: true,
-      // [촥촥 넘어가는 스냅 설정]
       snap: {
-        snapTo: 1 / (items.length - 1), // 아이템 개수에 맞춰 딱딱 끊기게
+        snapTo: 1 / (items.length - 1), 
         duration: 0.3,
         delay: 0,
         ease: "power1.inOut",
       },
       onUpdate: (self) => {
-        // [수정] 초기화 범위를 0.4(가로스크롤 중간) 아래로 확 낮췄어.
-        // 이렇게 해야 줌 섹션(0.8 이상)에서 화면이 안 꺼져!
         if (self.progress < 0.4) {
           document
             .querySelector(".info-history-horizontal")
@@ -164,7 +161,6 @@ $(document).ready(function () {
     },
   });
 
-  // 1. 연혁 가로 스크롤 (기능 유지 + 마지막 안착 수정)
   items.forEach((item, i) => {
     const targetYear = parseInt(item.querySelector(".big-year").innerText);
     const moveX =
@@ -282,7 +278,7 @@ $(document).ready(function () {
   const newsTL = gsap.timeline({
     scrollTrigger: {
       trigger: ".section03",
-      start: "top 20%", // 조금 더 일찍 시작해서 여유있게
+      start: "top 20%", 
       toggleActions: "play none none none",
     },
   });
@@ -306,7 +302,6 @@ $(document).ready(function () {
     start: "top 98%",
     onEnter: () => {
       gsap.to(".section03", {
-        opacity: "0",
         duration: 1.5,
         ease: "power2.inOut",
       });

@@ -719,12 +719,15 @@ header.open .depth2_wrap {
 }
 /* history track  */
 .history-track-wrap {
+  position: absolute;
+  top: 50%;
+  left: 0;
   width: 100%;
-  padding-left: 10%;
+  transform: translateY(-50%);
 }
 .history-track {
   display: flex;
-  gap: 300px;
+  gap: 280px;
 }
 .history-item {
   flex-shrink: 0;
@@ -777,7 +780,6 @@ header.open .depth2_wrap {
   background-image: url("images/visual-02.png");
 }
 /* history pagination */
-/* 페이지네이션 디자인 */
 .history-pagination {
   position: absolute;
   right: 5%;
@@ -1155,7 +1157,7 @@ header.open .depth2_wrap {
   min-height: 100vh;
   height: auto !important;
   background-color: #fcfcfc;
-  padding: 100px 0;
+  padding-top: 80px;
 }
 
 .about-value-wide {
@@ -1324,24 +1326,24 @@ header.open .depth2_wrap {
 }
 
 /* section05 */
-/* Section 05 Layout */
 .section05 {
   width: 100%;
-  padding: 60px 0;
+  padding-bottom: 80px;
   min-height: auto !important;
   height: auto !important;
-  background: #fff;
+  background: #fcfcfc;
   overflow: hidden;
 }
 
 .section05 .inner {
-  display: flex;
-  gap: 20px; /* 사진 사이 간격 */
   width: 100%;
-  max-width: 1400px; /* 너무 퍼지지 않게 최대 너비 제한 */
-  height: 350px; /* 누나 사진처럼 적당한 가로형 높이 */
-  margin: 0 auto; /* 가운데 정렬 */
-  padding: 0 20px; /* 양옆 여백 */
+  max-width: 1280px; 
+  margin: 0 auto;
+  padding: 0 20px; 
+}
+.content_box_wrap {
+  display: flex;
+  gap: 20px;
 }
 
 .content_box {
@@ -1349,15 +1351,14 @@ header.open .depth2_wrap {
   flex: 1;
   height: 180px;
   overflow: hidden;
-  border-radius: 10px; /* 사진 모서리 살짝 둥글게 (선택사항) */
+  border-radius: 8px; 
   text-decoration: none;
   display: flex;
-  align-items: center; /* 텍스트 세로 중앙 */
-  justify-content: flex-start; /* 텍스트 왼쪽 정렬 (한화 스타일) */
-  padding-left: 50px; /* 텍스트 왼쪽 여백 */
+  align-items: center; 
+  justify-content: flex-start; 
+  padding-left: 50px; 
 }
 
-/* 배경 이미지 설정 */
 .content_box .bg_img {
   position: absolute;
   top: 0;
@@ -1370,7 +1371,6 @@ header.open .depth2_wrap {
   z-index: 1;
 }
 
-/* 이미지 경로 (누나가 가진 이미지로 교체해!) */
 .video_box .bg_img {
   background-image: url("images/pr_video_bg.jpg");
 }
@@ -1378,7 +1378,6 @@ header.open .depth2_wrap {
   background-image: url("images/recruit_bg.jpg");
 }
 
-/* 이미지 어둡게 만들기 (글자 잘 보이게) */
 .content_box::after {
   content: "";
   position: absolute;
@@ -1391,25 +1390,18 @@ header.open .depth2_wrap {
   transition: background 0.4s;
 }
 
-/* 텍스트 영역 */
 .content_box .txt_wrap {
   position: relative;
   z-index: 3;
   text-align: center;
   color: #fff;
-}
+  display: flex;
+  
 
-.txt_wrap .category {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  display: block;
-  margin-bottom: 15px;
-  opacity: 0.8;
 }
 
 .txt_wrap h3 {
-  font-size: 48px;
+  font-size: 24px;
   font-weight: 700;
   margin-bottom: 20px;
 }
@@ -1420,23 +1412,6 @@ header.open .depth2_wrap {
   margin-bottom: 30px;
   font-weight: 300;
 }
-
-.btn_more {
-  display: inline-block;
-  padding: 12px 30px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 50px;
-  font-size: 14px;
-  transition: all 0.3s;
-}
-
-.btn_more span {
-  margin-left: 10px;
-}
-
-/* ===================================
-   마우스 올렸을 때 효과 (Hover)
-   =================================== */
 
 .content_box:hover .bg_img {
   transform: scale(1.1); /* 사진이 스르륵 커짐 */
@@ -1452,14 +1427,13 @@ header.open .depth2_wrap {
   border-color: #fff;
 }
 
-/* 경계선 추가 (선택사항) */
 .video_box {
   border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* ======= footer =======  */
 #footer {
-  background-color: rgb(51, 51, 51) !important; /* 농협 푸터 특유의 짙은 회색 */
+  background-color: rgb(51, 51, 51) !important; 
   color: #999;
   padding: 40px 0 90px;
   font-size: 14px;
@@ -1474,7 +1448,6 @@ header.open .depth2_wrap {
   padding: 0 20px;
 }
 
-/* 상단 라인 */
 .footer-top {
   display: flex;
   justify-content: space-between;
@@ -1482,7 +1455,7 @@ header.open .depth2_wrap {
   border-bottom: 1px solid #444;
   padding-bottom: 30px;
   margin-bottom: 30px;
-  flex-wrap: wrap; /* 모바일 대응 */
+  flex-wrap: wrap;
 }
 
 .footer-links {
@@ -1496,15 +1469,14 @@ header.open .depth2_wrap {
 }
 
 .footer-links li a.highlight {
-  color: #f9d400; /* 개인정보처리방침 강조색 */
+  color: #f9d400; 
   font-weight: 700;
 }
 
-/* SNS 아이콘 스타일 */
 .footer-sns {
   display: flex;
   gap: 10px;
-  margin-left: auto; /* 왼쪽 메뉴와 패밀리사이트 사이로 밀기 */
+  margin-left: auto; 
   margin-right: 24px;
 }
 
@@ -1533,7 +1505,6 @@ header.open .depth2_wrap {
   align-items: center;
 }
 
-/* 하단 정보 영역 */
 .footer-bottom {
   display: flex;
   align-items: flex-start;
@@ -1542,7 +1513,7 @@ header.open .depth2_wrap {
 
 .footer-logo img {
   width: 120px;
-  filter: brightness(0) invert(1); /* 로고를 흰색으로 반전 */
+  filter: brightness(0) invert(1); 
 }
 
 .footer-info address {
