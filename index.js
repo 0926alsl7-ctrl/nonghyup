@@ -122,7 +122,7 @@ $(document).ready(function () {
     },
   });
 
-  // section02 - history 
+  // section02 - history
   const items = gsap.utils.toArray(".history-item");
   const visuals = gsap.utils.toArray(".visual-item");
   const track = document.querySelector(".history-track");
@@ -135,20 +135,17 @@ $(document).ready(function () {
     scrollTrigger: {
       trigger: ".info-history-horizontal",
       start: "top top",
-      end: "+=12000", 
+      end: "+=12000",
       scrub: 1,
       pin: true,
       snap: {
-        snapTo: 1 / (items.length - 1), 
+        snapTo: 1 / (items.length - 1),
         duration: 0.3,
         delay: 0,
         ease: "power1.inOut",
       },
       onUpdate: (self) => {
         if (self.progress < 0.4) {
-          document
-            .querySelector(".info-history-horizontal")
-            .classList.remove("show-fog");
           gsap.set([zoomBg, zoomContent], { visibility: "hidden", opacity: 0 });
         }
 
@@ -212,10 +209,11 @@ $(document).ready(function () {
 
   historyTL
     .to(".history-wrapper", { autoAlpha: 0, duration: 0.5 })
-    .add(() => {
-      document
-        .querySelector(".info-history-horizontal")
-        .classList.add("show-fog");
+    .to(".info-history-horizontal", {
+      onStart: () => $(".info-history-horizontal").addClass("show-fog"),
+      onReverseComplete: () =>
+        $(".info-history-horizontal").removeClass("show-fog"),
+      duration: 0.1,
     })
     .set([zoomBg, zoomContent], { visibility: "visible" })
     .to(zoomBg, { opacity: 1, scale: 1, duration: 1.5, ease: "power2.inOut" })
@@ -269,7 +267,7 @@ $(document).ready(function () {
         prevEl: ".swiper-button-prev",
       },
       breakpoints: {
-        320: { slidesPerView: 1.1, spaceBetween: 15 },
+        320: { slidesPerView: 1.4, spaceBetween: 20 },
         1024: { slidesPerView: 3, spaceBetween: 30 },
       },
     });
@@ -278,7 +276,7 @@ $(document).ready(function () {
   const newsTL = gsap.timeline({
     scrollTrigger: {
       trigger: ".section03",
-      start: "top 20%", 
+      start: "top 20%",
       toggleActions: "play none none none",
     },
   });
