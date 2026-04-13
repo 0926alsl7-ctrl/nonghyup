@@ -123,6 +123,7 @@ $(document).ready(function () {
   });
 
   // section02 - history
+  // section02 - history (PC/모바일 통합 관리)
   const items = gsap.utils.toArray(".history-item");
   const visuals = gsap.utils.toArray(".visual-item");
   const track = document.querySelector(".history-track");
@@ -131,122 +132,215 @@ $(document).ready(function () {
   const pgBar = document.querySelector(".pg-bar-active");
   const currIdxTxt = document.querySelector(".curr-idx");
 
-  const historyTL = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".info-history-horizontal",
-      start: "top top",
-      end: "+=12000",
-      scrub: 1,
-      pin: true,
-      snap: {
-        snapTo: 1 / (items.length - 1),
-        duration: 0.3,
-        delay: 0,
-        ease: "power1.inOut",
-      },
-      onUpdate: (self) => {
-        if (self.progress < 0.4) {
-          gsap.set([zoomBg, zoomContent], { visibility: "hidden", opacity: 0 });
-        }
-
-        if (self.progress === 0) {
-          items.forEach((item) =>
-            item.querySelector(".big-year").classList.remove("counted"),
-          );
-        }
-      },
-    },
-  });
-
-  items.forEach((item, i) => {
-    const targetYear = parseInt(item.querySelector(".big-year").innerText);
-    const moveX =
-      i === items.length - 1
-        ? -(item.offsetLeft - window.innerWidth * 0.05)
-        : -(item.offsetLeft - window.innerWidth * 0.1);
-
-    historyTL.to(
-      track,
-      {
-        x: moveX,
-        duration: 1,
-        ease: "none",
-        onUpdate: function () {
-          const isCurrent = this.progress() > 0.5;
-          if (isCurrent) {
-            visuals.forEach((v, idx) =>
-              v.classList.toggle("active", idx === i),
-            );
-            items.forEach((it, idx) =>
-              it.classList.toggle("active", idx === i),
-            );
-
-            if (pgBar) pgBar.style.width = `${((i + 1) / items.length) * 100}%`;
-            if (currIdxTxt) currIdxTxt.innerText = `0${i + 1}`;
-
-            const yearEl = item.querySelector(".big-year");
-            if (!yearEl.classList.contains("counted")) {
-              yearEl.classList.add("counted");
-              gsap.fromTo(
-                yearEl,
-                { innerText: targetYear - 10 },
-                {
-                  innerText: targetYear,
-                  duration: 0.5,
-                  snap: { innerText: 1 },
-                  ease: "power2.out",
-                },
+  ScrollTrigger.matchMedia({
+    "(min-width: 769px)": function () {
+      const historyTL = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".info-history-horizontal",
+          start: "top top",
+          end: "+=12000",
+          scrub: 1,
+          pin: true,
+          snap: {
+            snapTo: 1 / (items.length - 1),
+            duration: 0.3,
+            delay: 0,
+            ease: "power1.inOut",
+          },
+          onUpdate: (self) => {
+            if (self.progress < 0.4) {
+              gsap.set([zoomBg, zoomContent], {
+                visibility: "hidden",
+                opacity: 0,
+              });
+            }
+            if (self.progress === 0) {
+              items.forEach((item) =>
+                item.querySelector(".big-year").classList.remove("counted"),
               );
             }
-          }
+          },
         },
-      },
-      i === 0 ? 0 : ">",
-    );
-  });
+      });
 
-  historyTL.to({}, { duration: 0.5 });
+      items.forEach((item, i) => {
+        const targetYear = parseInt(item.querySelector(".big-year").innerText);
+        const moveX =
+          i === items.length - 1
+            ? -(item.offsetLeft - window.innerWidth * 0.05)
+            : -(item.offsetLeft - window.innerWidth * 0.1);
 
-  historyTL
-    .to(".history-wrapper", { autoAlpha: 0, duration: 0.5 })
-    .to(".info-history-horizontal", {
-      onStart: () => $(".info-history-horizontal").addClass("show-fog"),
-      onReverseComplete: () =>
-        $(".info-history-horizontal").removeClass("show-fog"),
-      duration: 0.1,
-    })
-    .set([zoomBg, zoomContent], { visibility: "visible" })
-    .to(zoomBg, { opacity: 1, scale: 1, duration: 1.5, ease: "power2.inOut" })
-    .to(
-      zoomContent,
-      {
-        opacity: 1,
-        duration: 1,
-        onStart: () => {
-          const countNum = document.querySelector(".count-num");
-          if (countNum) {
-            gsap.fromTo(
-              countNum,
-              { innerText: 0 },
-              {
-                innerText: 65,
-                duration: 1.5,
-                snap: { innerText: 1 },
-                ease: "power2.out",
-              },
-            );
-          }
+        historyTL.to(
+          track,
+          {
+            x: moveX,
+            duration: 1,
+            ease: "none",
+            onUpdate: function () {
+              const isCurrent = this.progress() > 0.5;
+              if (isCurrent) {
+                visuals.forEach((v, idx) =>
+                  v.classList.toggle("active", idx === i),
+                );
+                items.forEach((it, idx) =>
+                  it.classList.toggle("active", idx === i),
+                );
+                if (pgBar)
+                  pgBar.style.width = `${((i + 1) / items.length) * 100}%`;
+                if (currIdxTxt) currIdxTxt.innerText = `0${i + 1}`;
+                const yearEl = item.querySelector(".big-year");
+                if (!yearEl.classList.contains("counted")) {
+                  yearEl.classList.add("counted");
+                  gsap.fromTo(
+                    yearEl,
+                    { innerText: targetYear - 10 },
+                    {
+                      innerText: targetYear,
+                      duration: 0.5,
+                      snap: { innerText: 1 },
+                      ease: "power2.out",
+                    },
+                  );
+                }
+              }
+            },
+          },
+          i === 0 ? 0 : ">",
+        );
+      });
+
+      historyTL.to({}, { duration: 0.5 });
+      historyTL
+        .to(".history-wrapper", { autoAlpha: 0, duration: 0.5 })
+        .to(".info-history-horizontal", {
+          onStart: () => $(".info-history-horizontal").addClass("show-fog"),
+          onReverseComplete: () =>
+            $(".info-history-horizontal").removeClass("show-fog"),
+          duration: 0.1,
+        })
+        .set([zoomBg, zoomContent], { visibility: "visible" })
+        .to(zoomBg, {
+          opacity: 1,
+          scale: 1,
+          duration: 1.5,
+          ease: "power2.inOut",
+        })
+        .to(
+          zoomContent,
+          {
+            opacity: 1,
+            duration: 1,
+            onStart: () => {
+              const countNum = document.querySelector(".count-num");
+              if (countNum) {
+                gsap.fromTo(
+                  countNum,
+                  { innerText: 0 },
+                  {
+                    innerText: 65,
+                    duration: 1.5,
+                    snap: { innerText: 1 },
+                    ease: "power2.out",
+                  },
+                );
+              }
+            },
+          },
+          "-=0.5",
+        )
+        .to(".section03", {
+          marginTop: 0,
+          duration: 1.5,
+          ease: "power2.inOut",
+        });
+    },
+
+    "(max-width: 768px)": function () {
+      const mHistoryTL = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".info-history-horizontal",
+          start: "top top",
+          end: "+=4000",
+          scrub: 1,
+          pin: true,
         },
-      },
-      "-=0.5",
-    );
+      });
 
-  historyTL.to(".section03", {
-    marginTop: 0,
-    duration: 1.5,
-    ease: "power2.inOut",
+      items.forEach((item, i) => {
+        mHistoryTL.to(
+          ".history-track",
+          {
+            // 각 아이템의 높이 + gap(120) 만큼 위로 이동
+            y: -i * (item.offsetHeight + 120),
+            duration: 1,
+            ease: "power1.inOut",
+            onStart: () => {
+              items.forEach((it, idx) =>
+                it.classList.toggle("active", idx === i),
+              );
+              visuals.forEach((v, idx) =>
+                v.classList.toggle("active", idx === i),
+              );
+
+              const progress = ((i + 1) / items.length) * 100;
+              document.documentElement.style.setProperty(
+                "--m-progress",
+                progress + "%",
+              );
+            },
+          },
+          i > 0 ? ">" : 0,
+        );
+      });
+
+      // 2. 모바일 줌 마무리
+      mHistoryTL
+        .to(".history-wrapper", { autoAlpha: 0, duration: 0.5 })
+        .to(".info-history-horizontal", {
+          // ★ 이 부분이 추가되어야 fog가 보여!
+          onStart: () => $(".info-history-horizontal").addClass("show-fog"),
+          onReverseComplete: () =>
+            $(".info-history-horizontal").removeClass("show-fog"),
+          duration: 0.1,
+        })
+        .set([zoomBg, zoomContent], { visibility: "visible", opacity: 0 })
+        .to(zoomBg, {
+          opacity: 1,
+          scale: 1, // PC랑 똑같이 1로 설정 (필요하면 1.1로 키워)
+          duration: 1.5,
+          ease: "power2.inOut",
+        })
+        .to(
+          zoomContent,
+          {
+            opacity: 1,
+            duration: 1,
+            onStart: () => {
+              const countNum = document.querySelector(".count-num");
+              if (countNum) {
+                gsap.fromTo(
+                  countNum,
+                  { innerText: 0 },
+                  {
+                    innerText: 65,
+                    duration: 1.5,
+                    snap: { innerText: 1 },
+                    ease: "power2.out",
+                  },
+                );
+              }
+            },
+          },
+          "-=0.5",
+        )
+        .to(".section03", {
+          marginTop: 0,
+          duration: 1.5,
+          ease: "power2.inOut",
+        });
+    },
   });
-
+  
   // swiper
   let newsSwiper = null;
 
