@@ -1259,16 +1259,33 @@ header.open .depth2_wrap {
   }
   .news-swiper {
     overflow: visible !important;
+    padding: 10px 0 40px;
   }
 
   .section-sub-title {
-    font-size: 20px;
+    font-size: 16px;
+    padding-left: 8px;
+  }
+  .news-section-top{
+    margin-bottom: 12px;
+  }
+  .sub-box{
+    padding: 12px;
   }
   .sub-header h4 {
-    font-size: 18px;
+    font-size: 16px;
   }
   .news-sub-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .card-txt h3{
+    font-size: 15px;
+    height: 50px;
+  }
+  .sub-list li a {
+    font-size: 14px;
+    padding: 10px;
   }
   .btn-view-all {
     width: 32px;

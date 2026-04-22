@@ -255,7 +255,10 @@ $(document).ready(function () {
         });
     },
 
-    "(max-width: 768px)": function () {
+     "(max-width: 768px)": function () {
+      // 1. 초기 상태 설정 (스크롤 올렸을 때 초기화용)
+      gsap.set([zoomBg, zoomContent], { visibility: "hidden", opacity: 0 });
+
       const mHistoryTL = gsap.timeline({
         scrollTrigger: {
           trigger: ".info-history-horizontal",
@@ -263,6 +266,12 @@ $(document).ready(function () {
           end: "+=4000",
           scrub: 1,
           pin: true,
+          // ★ 모바일에서도 스크롤 위치에 따라 줌화면 제어
+          onUpdate: (self) => {
+            if (self.progress < 0.8) { // 80% 이전에는 줌 화면 숨기기
+              gsap.set([zoomBg, zoomContent], { visibility: "hidden", opacity: 0 });
+            }
+          }
         },
       });
 
@@ -270,43 +279,33 @@ $(document).ready(function () {
         mHistoryTL.to(
           ".history-track",
           {
-            // 각 아이템의 높이 + gap(120) 만큼 위로 이동
             y: -i * (item.offsetHeight + 120),
             duration: 1,
             ease: "power1.inOut",
             onStart: () => {
-              items.forEach((it, idx) =>
-                it.classList.toggle("active", idx === i),
-              );
-              visuals.forEach((v, idx) =>
-                v.classList.toggle("active", idx === i),
-              );
-
+              items.forEach((it, idx) => it.classList.toggle("active", idx === i));
+              visuals.forEach((v, idx) => v.classList.toggle("active", idx === i));
               const progress = ((i + 1) / items.length) * 100;
-              document.documentElement.style.setProperty(
-                "--m-progress",
-                progress + "%",
-              );
+              document.documentElement.style.setProperty("--m-progress", progress + "%");
             },
           },
-          i > 0 ? ">" : 0,
+          i > 0 ? ">" : 0
         );
       });
 
-      // 2. 모바일 줌 마무리
+      // 2. 모바일 줌 마무리 (PC와 동일하게 보강)
       mHistoryTL
         .to(".history-wrapper", { autoAlpha: 0, duration: 0.5 })
         .to(".info-history-horizontal", {
-          // ★ 이 부분이 추가되어야 fog가 보여!
           onStart: () => $(".info-history-horizontal").addClass("show-fog"),
-          onReverseComplete: () =>
-            $(".info-history-horizontal").removeClass("show-fog"),
+          onReverseComplete: () => $(".info-history-horizontal").removeClass("show-fog"),
           duration: 0.1,
         })
-        .set([zoomBg, zoomContent], { visibility: "visible", opacity: 0 })
+        // ★ 여기서 visibility를 확실히 살려줘야 해!
+        .set([zoomBg, zoomContent], { visibility: "visible" }) 
         .to(zoomBg, {
           opacity: 1,
-          scale: 1, // PC랑 똑같이 1로 설정 (필요하면 1.1로 키워)
+          scale: 1, 
           duration: 1.5,
           ease: "power2.inOut",
         })
@@ -331,7 +330,7 @@ $(document).ready(function () {
               }
             },
           },
-          "-=0.5",
+          "-=0.5"
         )
         .to(".section03", {
           marginTop: 0,
