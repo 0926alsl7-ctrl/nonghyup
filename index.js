@@ -46,7 +46,7 @@ $(document).ready(function () {
     },
   });
 
-  // 공통 ui ============================
+  // 공통  ============================
   $("#header").on("mouseenter", function () {
     if ($(window).width() > 1024) $(this).addClass("open");
   });
@@ -123,7 +123,6 @@ $(document).ready(function () {
   });
 
   // section02 - history
-  // section02 - history (PC/모바일 통합 관리)
   const items = gsap.utils.toArray(".history-item");
   const visuals = gsap.utils.toArray(".visual-item");
   const track = document.querySelector(".history-track");
@@ -255,8 +254,7 @@ $(document).ready(function () {
         });
     },
 
-     "(max-width: 768px)": function () {
-      // 1. 초기 상태 설정 (스크롤 올렸을 때 초기화용)
+    "(max-width: 768px)": function () {
       gsap.set([zoomBg, zoomContent], { visibility: "hidden", opacity: 0 });
 
       const mHistoryTL = gsap.timeline({
@@ -266,12 +264,16 @@ $(document).ready(function () {
           end: "+=4000",
           scrub: 1,
           pin: true,
-          // ★ 모바일에서도 스크롤 위치에 따라 줌화면 제어
+          
           onUpdate: (self) => {
-            if (self.progress < 0.8) { // 80% 이전에는 줌 화면 숨기기
-              gsap.set([zoomBg, zoomContent], { visibility: "hidden", opacity: 0 });
+            if (self.progress < 0.8) {
+              
+              gsap.set([zoomBg, zoomContent], {
+                visibility: "hidden",
+                opacity: 0,
+              });
             }
-          }
+          },
         },
       });
 
@@ -283,29 +285,35 @@ $(document).ready(function () {
             duration: 1,
             ease: "power1.inOut",
             onStart: () => {
-              items.forEach((it, idx) => it.classList.toggle("active", idx === i));
-              visuals.forEach((v, idx) => v.classList.toggle("active", idx === i));
+              items.forEach((it, idx) =>
+                it.classList.toggle("active", idx === i),
+              );
+              visuals.forEach((v, idx) =>
+                v.classList.toggle("active", idx === i),
+              );
               const progress = ((i + 1) / items.length) * 100;
-              document.documentElement.style.setProperty("--m-progress", progress + "%");
+              document.documentElement.style.setProperty(
+                "--m-progress",
+                progress + "%",
+              );
             },
           },
-          i > 0 ? ">" : 0
+          i > 0 ? ">" : 0,
         );
       });
 
-      // 2. 모바일 줌 마무리 (PC와 동일하게 보강)
       mHistoryTL
         .to(".history-wrapper", { autoAlpha: 0, duration: 0.5 })
         .to(".info-history-horizontal", {
           onStart: () => $(".info-history-horizontal").addClass("show-fog"),
-          onReverseComplete: () => $(".info-history-horizontal").removeClass("show-fog"),
+          onReverseComplete: () =>
+            $(".info-history-horizontal").removeClass("show-fog"),
           duration: 0.1,
         })
-        // ★ 여기서 visibility를 확실히 살려줘야 해!
-        .set([zoomBg, zoomContent], { visibility: "visible" }) 
+        .set([zoomBg, zoomContent], { visibility: "visible" })
         .to(zoomBg, {
           opacity: 1,
-          scale: 1, 
+          scale: 1,
           duration: 1.5,
           ease: "power2.inOut",
         })
@@ -330,7 +338,7 @@ $(document).ready(function () {
               }
             },
           },
-          "-=0.5"
+          "-=0.5",
         )
         .to(".section03", {
           marginTop: 0,
@@ -339,7 +347,7 @@ $(document).ready(function () {
         });
     },
   });
-  
+
   // swiper
   let newsSwiper = null;
 
@@ -360,7 +368,8 @@ $(document).ready(function () {
         prevEl: ".swiper-button-prev",
       },
       breakpoints: {
-        320: { slidesPerView: 1.4, spaceBetween: 20 },
+        320: { slidesPerView: 1.2, spaceBetween: 20 },
+        768: { slidesPerView: 2, spaceBetween: 20 },
         1024: { slidesPerView: 3, spaceBetween: 30 },
       },
     });
@@ -388,33 +397,74 @@ $(document).ready(function () {
       "-=1",
     );
 
-  ScrollTrigger.create({
-    trigger: ".section04",
-    start: "top 98%",
-    onEnter: () => {
-      gsap.to(".section03", {
-        duration: 1.5,
-        ease: "power2.inOut",
-      });
+  // section04
+  ScrollTrigger.matchMedia({
+    "(min-width: 769px)": function () {
+      ScrollTrigger.create({
+        trigger: ".section04",
+        start: "top 80%", 
+        onEnter: () => {
+          gsap.to(".section03", { duration: 1.5, ease: "power2.inOut" });
 
-      // gsap.to(window, {
-      //   scrollTo: ".section04",
-      //   duration: 1.2,
-      //   ease: "power2.inOut",
-      // });
-
-      $(".value-banner.split").each(function (i, el) {
-        gsap.to(el, {
-          opacity: 1,
-          x: 0,
-          duration: 1.8,
-          delay: 0.3 + i * 0.4,
-          ease: "power4.out",
-        });
+          $(".value-banner.split").each(function (i, el) {
+            gsap.to(el, {
+              opacity: 1,
+              x: 0,
+              duration: 1.8,
+              delay: 0.3 + i * 0.4,
+              ease: "power4.out",
+            });
+          });
+        },
+        onLeaveBack: () => {
+          gsap.to(".section03", {
+            opacity: 1,
+            duration: 1,
+            ease: "power2.inOut",
+          });
+        },
       });
     },
-    onLeaveBack: () => {
-      gsap.to(".section03", { opacity: 1, duration: 1, ease: "power2.inOut" });
+
+    //section04 - mobile
+    "(max-width: 768px)": function () {
+      ScrollTrigger.create({
+        trigger: ".section04",
+        start: "top 90%", 
+        onEnter: () => {
+          gsap.to(".section03", { duration: 1.5, ease: "power2.inOut" });
+
+          $(".value-banner.split").each(function (i, el) {
+            gsap.to(el, {
+              opacity: 1,
+              y: 0, 
+              duration: 1.5,
+              delay: 0.2 + i * 0.3,
+              ease: "power3.out",
+            });
+          });
+        },
+        onLeaveBack: () => {
+          gsap.to(".section03", {
+            opacity: 1,
+            duration: 1,
+            ease: "power2.inOut",
+          });
+        },
+      });
+     
+      gsap.from(".content_box", {
+        scrollTrigger: {
+          trigger: ".section05",
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        opacity: 0,
+        x: 50, 
+        stagger: 0.2,
+        duration: 1,
+        ease: "power2.out",
+      });
     },
   });
 });
