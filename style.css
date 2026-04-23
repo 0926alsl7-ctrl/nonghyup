@@ -942,7 +942,7 @@ header.open .depth2_wrap {
   }
   .history-wrapper::before {
     top: 0;
-    left: 30px;
+    left: 20px;
     width: 4px;
     transform: none;
     height: 100%;
@@ -952,7 +952,7 @@ header.open .depth2_wrap {
     content: "";
     position: absolute;
     top: 0;
-    left: 30px;
+    left: 20px;
     width: 4px;
     height: var(--m-progress, 0%);
     max-height: 100%;
@@ -961,7 +961,7 @@ header.open .depth2_wrap {
   }
   .history-title {
     top: 80px;
-    left: 64px;
+    left: 50px;
     margin-bottom: 0;
     border-left: none;
     padding-left: 0;
@@ -1013,9 +1013,9 @@ header.open .depth2_wrap {
   .history-fixed-visual {
     top: 106px;
     right: 0;
-    left: 60px;
-    width: calc(100% - 90px);
-    height: 340px;
+    left: 50px;
+    width: calc(100% - 80px);
+    height: 320px;
     padding: 20px 0;
   }
 
