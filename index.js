@@ -310,7 +310,8 @@ $(document).ready(function () {
             $(".info-history-horizontal").removeClass("show-fog"),
           duration: 0.1,
         })
-        .set([zoomBg, zoomContent], { visibility: "visible" })
+        .set([zoomBg, zoomContent], { visibility: "visible" 
+        })
         .to(zoomBg, {
           opacity: 1,
           scale: 1,

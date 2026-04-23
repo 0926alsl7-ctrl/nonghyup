@@ -828,8 +828,8 @@ header.open .depth2_wrap {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100vw !important;
+  height: 100vh !important;
   z-index: 100;
   transform: scale(2);
   opacity: 0;
@@ -1633,7 +1633,7 @@ header.open .depth2_wrap {
   }
 
   .content_box {
-    flex: 0 0 70%;
+    flex: 0 0 100%;
     height: 130px !important; 
     scroll-snap-align: center; 
     display: flex !important; 
@@ -1644,7 +1644,7 @@ header.open .depth2_wrap {
 
   .video_box,
   .recruit_box {
-    width: 70% !important;
+    width: 100% !important;
   }
 }
 
