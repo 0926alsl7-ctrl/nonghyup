@@ -758,9 +758,9 @@ header.open .depth2_wrap {
   word-break: keep-all;
 }
 .history-detail {
-  margin-top: 8px !important;
-  font-size: 16px !important;
-  color: #ccc !important;
+  margin-top: 8px;
+  font-size: 16px;
+  color: #ccc;
 }
 
 .history-fixed-visual .visual-item:nth-child(1) {
@@ -967,14 +967,14 @@ header.open .depth2_wrap {
     padding-left: 0;
   }
   .history-title h3 {
-    font-size: 22px;
+    font-size: 20px;
   }
   .history-title p {
     display: none;
   }
   .history-track-wrap {
     position: absolute;
-    top: 60%;
+    top: 61%;
     width: 100%;
     height: auto;
     transform: none;
@@ -986,37 +986,36 @@ header.open .depth2_wrap {
     display: flex;
     flex-direction: column;
     gap: 120px;
-    padding-left: 70px;
+    padding-left: 62px;
     will-change: transform;
   }
 
   .history-item {
-    opacity: 0.2;
+    opacity: 0.1;
     width: 100%;
     text-align: left;
   }
   .history-item.active {
-    opacity: 1;
+    opacity: 1 !important;
   }
 
   .history-text .big-year {
-    font-size: 30px;
-    margin-bottom: 5px;
+    font-size: 24px;
+    margin-bottom: 10px;
   }
   .history-text .h-tit {
-    font-size: 16px;
+    font-size: 15px;
   }
   .history-detail {
-    font-size: 14px !important;
+    font-size: 12px;
   }
 
   .history-fixed-visual {
-    top: 106px;
+    top: 118px;
     right: 0;
     left: 50px;
     width: calc(100% - 80px);
     height: 320px;
-    padding: 20px 0;
   }
 
   .history-pagination {
