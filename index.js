@@ -266,8 +266,14 @@ $(document).ready(function () {
           pin: true,
           
           onUpdate: (self) => {
-            if (self.progress < 0.8) {
+            if (self.progress > 0.8) {
               
+              gsap.set([zoomBg, zoomContent], {
+                visibility: "visible",
+                opacity: 1,
+              });
+            }
+            else{
               gsap.set([zoomBg, zoomContent], {
                 visibility: "hidden",
                 opacity: 0,
