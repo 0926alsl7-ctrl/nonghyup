@@ -885,7 +885,7 @@ header.open .depth2_wrap {
     display: none;
   }
   .info-intro h2 {
-    font-size: 28px;
+    font-size: 24px;
   }
   .slogan-wrap {
     font-size: 14px;
@@ -897,10 +897,13 @@ header.open .depth2_wrap {
     border-radius: 4px;
     height: auto;
   }
-
+  .value-content{
+    bottom: 22px;
+    left: 16px;
+  }
   .value-item {
     width: 100%;
-    height: 240px;
+    height: 314px;
   }
   .value-item:hover {
     flex: none;
@@ -909,7 +912,7 @@ header.open .depth2_wrap {
     display: none;
   }
   .value-item h3 {
-    font-size: 16px;
+    font-size: 14px;
   }
   .item-bg1,
   .item-bg1:hover,
@@ -942,7 +945,7 @@ header.open .depth2_wrap {
   }
   .history-wrapper::before {
     top: 0;
-    left: 20px;
+    left: 12px;
     width: 4px;
     transform: none;
     height: 100%;
@@ -952,7 +955,7 @@ header.open .depth2_wrap {
     content: "";
     position: absolute;
     top: 0;
-    left: 20px;
+    left: 12px;
     width: 4px;
     height: var(--m-progress, 0%);
     max-height: 100%;
@@ -960,8 +963,8 @@ header.open .depth2_wrap {
     transition: height 0.3s ease;
   }
   .history-title {
-    top: 80px;
-    left: 50px;
+    top: 84px;
+    left: 42px;
     margin-bottom: 0;
     border-left: none;
     padding-left: 0;
@@ -974,7 +977,7 @@ header.open .depth2_wrap {
   }
   .history-track-wrap {
     position: absolute;
-    top: 61%;
+    top: 44%;
     width: 100%;
     height: auto;
     transform: none;
@@ -986,7 +989,7 @@ header.open .depth2_wrap {
     display: flex;
     flex-direction: column;
     gap: 120px;
-    padding-left: 62px;
+    padding-left: 46px;
     will-change: transform;
   }
 
@@ -1011,11 +1014,14 @@ header.open .depth2_wrap {
   }
 
   .history-fixed-visual {
-    top: 118px;
+    top: 126px;
     right: 0;
-    left: 50px;
-    width: calc(100% - 80px);
-    height: 320px;
+    left: 34px;
+    width: calc(100% - 54px);
+    height: 220px;
+  }
+  .visual-item{
+    border-radius: 4px;
   }
 
   .history-pagination {
@@ -1438,8 +1444,8 @@ header.open .depth2_wrap {
     background: transparent;
     position: relative; 
     width: 100% !important;
-    height: 320px !important; 
-    margin-bottom: 30px; 
+    height: 280px !important; 
+    margin-bottom: 34px; 
     align-self: center !important;
     opacity: 0;
     transform: translateY(50px) !important;
@@ -1484,7 +1490,7 @@ header.open .depth2_wrap {
   }
   .txt-inner h4 {
     color: #ffffff !important;
-    font-size: 24px !important;
+    font-size: 20px;
     margin-bottom: 10px !important;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
@@ -1776,6 +1782,9 @@ header.open .depth2_wrap {
   .footer-bottom {
     flex-direction: column;
     gap: 20px;
+  }
+  .footer-logo img {
+    width: 80px;
   }
 
   .footer-cert {
