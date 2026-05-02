@@ -464,6 +464,10 @@ header.open .depth2_wrap {
     bottom: 80px;
     width: 84%;
   }
+  .video-ctrl-btn {
+    width: 30px;
+    height: 30px;
+  }
 
   .video-overlay,
   .main-quick-menu {
@@ -878,8 +882,14 @@ header.open .depth2_wrap {
 }
 /* ***************section02 mobile *************** */
 @media (max-width: 768px) {
+  .section02 .inner {
+  padding-top: 80px;
+}
+.info-container{
+  padding: 0 20px;
+}
   .info-intro {
-    margin-bottom: 36px;
+    margin-bottom: 48px;
   }
   .vision-badge {
     display: none;
@@ -903,7 +913,7 @@ header.open .depth2_wrap {
   }
   .value-item {
     width: 100%;
-    height: 314px;
+    height: 240px;
   }
   .value-item:hover {
     flex: none;
@@ -933,6 +943,10 @@ header.open .depth2_wrap {
   .item-bg4:hover,
   .item-bg4:focus {
     background-image: url("images/vision4.png") !important;
+  }
+  .info-wrap{
+    padding-bottom: 0;
+    margin-bottom: 120px;
   }
 
   /* section02 mobile history ====== */
@@ -977,7 +991,7 @@ header.open .depth2_wrap {
   }
   .history-track-wrap {
     position: absolute;
-    top: 44%;
+    top: 45%;
     width: 100%;
     height: auto;
     transform: none;
