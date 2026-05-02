@@ -824,7 +824,7 @@ header.open .depth2_wrap {
 
 /* history zoom */
 .history-zoom-bg {
-  background: url(/images/visual-03.png) center/cover no-repeat;
+  background: url(./images/visual-03.png) center/cover no-repeat;
   position: fixed;
   top: 0;
   left: 0;
